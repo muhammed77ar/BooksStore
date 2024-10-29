@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->json(["message" => "Your account created successfully", "user" => $user, "token" => $token], 201);
+        return response()->json(["message" => "Account created successfully", "user" => $user, "token" => $token], 201);
     }
 }
