@@ -18,7 +18,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): Response
+    public function store(Request $request) 
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -27,16 +27,25 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if ($request->hasFile('profile')) {
+            $request->profile = '/storage/'.$request->file("profile")->store('/images/profile', "public");
+        }else{
+            $request['profile'] = '/storage/defaultProfile/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'profile' => $request->profile,
             'password' => Hash::make($request->password),
         ]);
+
+        $token = $user->createToken('api', [$user->role])->plainTextToken;
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return response()->noContent();
+        return response()->json(["message" => "Your account created successfully", "user" => $user, "token" => $token], 201);
     }
 }
