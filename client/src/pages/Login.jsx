@@ -1,6 +1,37 @@
 import { motion } from "framer-motion"
+import { useRef } from "react"
+import axiosClient from "../axios";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../Redux/AuthSlice";
 
 export default function Login() {
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const dispatch = useDispatch()
+
+    const handelSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("email", emailRef.current.value);
+        formData.append("password", passwordRef.current.value);
+
+        try {
+            const response = await axiosClient.post("/login", formData);
+            if (response && response.status === 200) {
+                const data = response?.data;
+                const token = data?.token;
+                dispatch(login(token));
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.errors) {
+                console.log(error.response.data.errors);
+            }else{
+                console.log(error)
+            }
+        }
+    }
+
     return (
         <div className="h-screen overflow-hidden bg-neutral-900">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="flex justify-center mt-12 w-full">
@@ -12,14 +43,14 @@ export default function Login() {
                             <p className="mt-1.5 text-sm font-medium text-white/50">Welcome back, enter your credentials to continue.</p>
                         </div>
                         <div className="p-6 pt-0">
-                            <form>
+                            <form onSubmit={handelSubmit}>
                                 <div>
                                     <div>
                                         <div className="group rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                                             <div className="flex justify-between">
-                                                <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Username</label>
+                                                <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Email</label>
                                             </div>
-                                            <input type="text" name="username" placeholder="Username" autoComplete="off" className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground" />
+                                            <input ref={emailRef} type="text" name="email" autoComplete="off" className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground" />
                                         </div>
                                     </div>
                                 </div>
@@ -30,7 +61,7 @@ export default function Login() {
                                                 <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">Password</label>
                                             </div>
                                             <div className="flex items-center">
-                                                <input type="password" name="password" className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground" />
+                                                <input ref={passwordRef} type="password" name="password" className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground" />
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +74,7 @@ export default function Login() {
                                     <a className="text-sm font-medium text-foreground underline" href="/forgot-password">Forgot password?</a>
                                 </div>
                                 <div className="mt-4 flex items-center justify-end gap-x-2">
-                                    <a className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200" href="/register">Register</a>
+                                    <Link className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200" to="/signup">Register</Link>
                                     <button className="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2" type="submit">Log in</button>
                                 </div>
                             </form>

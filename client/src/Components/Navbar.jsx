@@ -42,9 +42,9 @@ export default function Navbar() {
         <div className="overflow-hidden bg-neutral-900 text-white">
             <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className="flex justify-between items-center px-9 py-3">
                 <div className="overflow-hidden">
-                    <motion.h1 variants={hideNavItemsVariant} className="capitalize text-xl font-bold">
-                        Thoughts
-                    </motion.h1>
+                    <motion.h variants={hideNavItemsVariant} className="capitalize text-xl font-bold">
+                        <Link to={"/"}>Thoughts</Link>
+                    </motion.h>
                 </div>
                 <div className="overflow-hidden">
                     <motion.div variants={hideNavItemsVariant} onClick={() => setMobileNavOpen(true)} className="uppercase text-xs cursor-pointer">
