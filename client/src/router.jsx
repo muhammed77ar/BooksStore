@@ -5,8 +5,8 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import About from "./pages/About"
 import AuthLayout from "./Layouts/AuthLayout"
-import UserLayout from "./Layouts/UserLayout"
 import ProtectedRoute from "./ProtectedRoute"
+import AdminLayout from "./Layouts/AdminLayout"
 
 const router = createBrowserRouter([
     {
@@ -17,10 +17,10 @@ const router = createBrowserRouter([
         ]
     },
     {
-        element : <ProtectedRoute isAuthRoute={false}><UserLayout /></ProtectedRoute>,
+        element : <ProtectedRoute isAuthRoute={false}><AdminLayout /></ProtectedRoute>,
         children : [
-            {path: "/user", element: <Home />},
-            {path: "/user/about", element: <About />}
+            {path: "/admin", element: <Home />},
+            {path: "/admin/about", element: <About />}
         ]
     },
     {

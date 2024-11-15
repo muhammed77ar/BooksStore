@@ -6,14 +6,14 @@ import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
 
-export default function UserLayout() {
+export default function AdminLayout() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
   const user = useSelector((state) => state.auth.user)
   console.log(user)
   const dispatch = useDispatch()
   const GetUserdata = async () => {
     try {
-      const response = await axiosClient.get("api/user");
+      const response = await axiosClient.get("api/admin");
       if (response) {
         dispatch(setUserInfo(response?.data?.user))
       }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
-class RegisteredUserController extends Controller
+class RegisteredAdminController extends Controller
 {
     /**
      * Handle an incoming registration request.
@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Admin::class],
             'profile' => ['somtimes', 'image' , 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
             $request['profile'] = '/storage/defaultProfile/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
         }
 
-        $user = User::create([
+        $user = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'profile' => $request->profile,

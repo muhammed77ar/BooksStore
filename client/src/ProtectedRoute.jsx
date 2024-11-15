@@ -6,7 +6,7 @@ export default function ProtectedRoute({children, isAuthRoute}) {
 
     // If the user is authenticated and this is an auth route, redirect to /user
     if (isAuthenticated && isAuthRoute) {
-        return <Navigate to="/user" />;
+        return <Navigate to="/admin" />;
     }
 
     // If the user is not authenticated and this is a protected route, redirect to /login
