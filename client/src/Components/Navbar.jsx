@@ -39,7 +39,7 @@ export default function Navbar() {
         closed: { opacity: 0, y: "100%", transition: { duration: 0.25, ease: "easeInOut" } },
     };
     return (
-        <div className="overflow-hidden bg-neutral-900 text-white">
+        <div className="overflow-hidden bg-transparent">
             <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className="flex justify-between items-center px-9 py-3">
                 <div className="overflow-hidden">
                     <motion.h variants={hideNavItemsVariant} className="capitalize text-xl font-bold">
@@ -48,10 +48,10 @@ export default function Navbar() {
                 </div>
                 <div className="overflow-hidden">
                     <motion.div variants={hideNavItemsVariant} onClick={() => setMobileNavOpen(true)} className="uppercase text-xs cursor-pointer">
-                        <IoMenu className="text-4xl bg-gray-500 p-0 m-0 rounded-full" />
+                        <IoMenu className="text-4xl bg-gray-500 p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
-                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-black">
+                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-black text-white z-20">
                     <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 text-white uppercase text-xs">
                         <IoClose className=" text-4xl bg-gray-500 p-0 m-0 rounded-full" />
                     </motion.button>
