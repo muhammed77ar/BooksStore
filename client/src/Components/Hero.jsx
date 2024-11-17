@@ -1,42 +1,35 @@
 import { motion } from 'framer-motion';
 
 export default function Hero() {
-// Animation Variants
-const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } }
-};
+    const textVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } }
+    };
 
-const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 0.5, ease: 'easeOut' } }
-};
+    const buttonVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 0.5, ease: 'easeOut' } }
+    };
 
     return (
-        <main className="h-screen overflow-hidden">
-            <div className=" px-6 grid grid-cols-12 grid-rows-6 h-[90%] gap-4 md:grid pb-2">
-                {/* Div 1: Visible on all screen sizes */}
+        <main className="h-screen overflow-hidden bg-[url('../images/backgroundbook.jpg')] bg-cover bg-center md:bg-none">
+            <div className='px-6 w-full h-full bg-black/50 md:bg-transparent'>
+            <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 md:grid pb-2">
                 <motion.div
-                    className="flex flex-col gap-6 col-span-12 md:col-span-6 md:row-span-7 mt-28"
+                    className="flex flex-col gap-8 md:gap-5 col-span-12 md:col-span-6 md:row-span-7 pt-24 md:pt-28 "
                     initial="hidden"
                     animate="visible"
                     variants={textVariants}
                 >
-                    <motion.div className="font-extrabold text-6xl text-slate-700 font-gentium uppercase tracking-tighter transform scale-y-125">
-                        <h1>Discover Your</h1>
-                        <div className="flex items-center md:gap-3">
-                            <h1>Next Favorite</h1>
-                            <div>
-                                <img className="w-[100px] object-cover drop-shadow-xl" src="../images/bookpng.png" alt="" />
-                            </div>
-                        </div>
+                    <motion.div className="font-extrabold text-6xl text-white md:text-slate-700  text-center md:text-start font-gentium uppercase tracking-tighter transform scale-y-125">
+                        Discover Your Next Favorite Book
                     </motion.div>
-                    <motion.div className="text-slate-700" initial="hidden" animate="visible" variants={textVariants}>
+                    <motion.div className="text-white md:text-slate-700 text-center md:text-start" initial="hidden" animate="visible" variants={textVariants}>
                         From timeless classics to modern bestsellers, explore a world of stories, knowledge, and inspiration. Start your reading adventure today!
                     </motion.div>
-                    <motion.div className="flex gap-4">
+                    <motion.div className="flex px-6 md:px-0 flex-col md:flex-row gap-2 md:gap-4">
                         <motion.button
-                            className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
+                            className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-2 border-white md:border-none bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
                             initial="hidden"
                             animate="visible"
                             variants={buttonVariants}
@@ -47,7 +40,7 @@ const buttonVariants = {
                             </div>
                         </motion.button>
                         <motion.button
-                            className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
+                            className="group relative inline-flex h-12 items-center border-2 border-white md:border-none justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
                             initial="hidden"
                             animate="visible"
                             variants={buttonVariants}
@@ -100,6 +93,7 @@ const buttonVariants = {
                     animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                 >
                 </motion.div>
+            </div>
             </div>
         </main>
     )
