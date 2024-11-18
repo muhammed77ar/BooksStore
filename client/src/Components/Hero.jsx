@@ -12,7 +12,7 @@ export default function Hero() {
     };
 
     return (
-        <main className="h-screen overflow-hidden bg-[url('../images/backgroundbook.jpg')] bg-cover bg-center md:bg-none">
+        <main data-scroll data-scroll-section data-scroll-speed="-.8" className="h-screen bg-[url('../images/backgroundbook.jpg')] bg-cover bg-center md:bg-none">
             <div className='px-6 w-full h-full bg-black/50 md:bg-transparent'>
             <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 md:grid pb-2">
                 <motion.div
