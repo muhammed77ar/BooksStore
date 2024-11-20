@@ -68,7 +68,7 @@ export default function Hero() {
 
                     {/* Other Divs: Hidden on small screens */}
                     <motion.div
-                        className="hidden md:block md:col-span-4 md:row-span-2 md:col-start-7 bg-slate-300 rounded-xl bg-[url('../images/image3.jpg')] bg-cover bg-center shadow-custom"
+                        className="hidden md:block md:col-span-4 md:row-span-2 md:col-start-7 bg-slate-300 rounded-xl bg-[url('../images/image9.jpg')] bg-cover bg-center shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >
@@ -101,7 +101,7 @@ export default function Hero() {
                     </motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-2 md:col-start-9 md:row-start-3 bg-yellow-200 rounded-xl bg-[url('../images/image9.jpg')] bg-cover shadow-custom"
+                        className="hidden md:block md:col-span-2 md:row-span-2 md:col-start-9 md:row-start-3 bg-yellow-200 rounded-xl bg-[url('../images/book.jpg')] bg-cover bg-center shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >

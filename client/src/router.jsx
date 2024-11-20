@@ -1,35 +1,101 @@
-import {createBrowserRouter} from "react-router-dom"
-import GuestLayout from "./Layouts/GuestLayout"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import About from "./pages/About"
-import AuthLayout from "./Layouts/AuthLayout"
-import ProtectedRoute from "./ProtectedRoute"
-import AdminLayout from "./Layouts/AdminLayout"
+import { createBrowserRouter } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import ProtectedRoute from "./ProtectedRoute";
+
+// Lazy load components
+const GuestLayout = lazy(() => import("./Layouts/GuestLayout"));
+const AuthLayout = lazy(() => import("./Layouts/AuthLayout"));
+const AdminLayout = lazy(() => import("./Layouts/AdminLayout"));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+
+// Loading fallback component
+const Loading = () => <div>Loading...</div>;
 
 const router = createBrowserRouter([
-    {
-        element : <ProtectedRoute isAuthRoute><GuestLayout /></ProtectedRoute>,
-        children : [
-            {path:"/", element : <Home />},
-            {path:"/about", element: <About />}
-        ]
-    },
-    {
-        element : <ProtectedRoute isAuthRoute={false}><AdminLayout /></ProtectedRoute>,
-        children : [
-            {path: "/admin", element: <Home />},
-            {path: "/admin/about", element: <About />}
-        ]
-    },
-    {
-        element : <ProtectedRoute isAuthRoute><AuthLayout /></ProtectedRoute>,
-        children : [
-            {path:"/login", element: <Login />},
-            {path:"/signup", element: <Signup />},
-        ]
-    }
-])
+  {
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProtectedRoute isAuthRoute>
+          <GuestLayout />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/about",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <About />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProtectedRoute isAuthRoute={false}>
+          <AdminLayout />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "/admin",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/about",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <About />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProtectedRoute isAuthRoute>
+          <AuthLayout />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "/login",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/signup",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Signup />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;
