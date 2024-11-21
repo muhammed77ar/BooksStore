@@ -8,7 +8,7 @@ const MOBILE_NAV_ITEMS = [
     { id: 0, navTitle: "Home", path: "/" },
     { id: 1, navTitle: "login", path: "/login" },
     { id: 2, navTitle: "signup", path: "/signup" },
-    { id: 3, navTitle: "about", path: "/about" },
+    { id: 3, navTitle: "categories", path: "/categories" },
 ];
 
 export default function Navbar() {
@@ -48,12 +48,12 @@ export default function Navbar() {
                 </div>
                 <div className="overflow-hidden">
                     <motion.div variants={hideNavItemsVariant} onClick={() => setMobileNavOpen(true)} className="uppercase text-xs cursor-pointer">
-                        <IoMenu className="text-4xl bg-gray-500 p-0 m-0 rounded-full text-white" />
+                        <IoMenu className="text-4xl bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
                 <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-black text-white z-20">
                     <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 text-white uppercase text-xs">
-                        <IoClose className=" text-4xl bg-gray-500 p-0 m-0 rounded-full" />
+                        <IoClose className=" text-4xl bg-white text-black p-0 m-0 rounded-full" />
                     </motion.button>
                     <motion.ul variants={ulVariant} className="mt-10 list-none">
                         {MOBILE_NAV_ITEMS.map((navItem) => (

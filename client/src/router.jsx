@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/about",
+        path: "/categories",
         element: (
           <Suspense fallback={<Loading />}>
             <Categories />
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/about",
+        path: "/admin/categories",
         element: (
           <Suspense fallback={<Loading />}>
             <Categories />
