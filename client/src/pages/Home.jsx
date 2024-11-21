@@ -1,6 +1,6 @@
 import { DragCards } from "../Components/DragCards";
 import Hero from "../Components/Hero";
-import About from "./About";
+import Categories from "./Categories";
 import ContactUs from "./ContactUs";
 import Section from "./Section";
 
@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Hero />
       <DragCards />
-      <About />
+      <Categories />
       <ContactUs />
       <Section />
     </>

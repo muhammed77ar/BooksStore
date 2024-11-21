@@ -23,8 +23,8 @@ export default function Hero() {
     };
 
     return (
-        <main className="h-screen bg-[url('../images/backgroundbook.jpg')] bg-cover bg-center md:bg-none">
-            <div className='px-6 w-full h-full bg-black/50 md:bg-transparent'>
+        <main className="h-screen bg-[url('/images/paper2.jpg')] bg-cover bg-center md:bg-none">
+            <div className='px-6 w-full h-full md:bg-[url("/images/paper2.jpg")]'>
                 <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 md:grid pb-2">
                     <motion.div
                         className="flex flex-col gap-8 md:gap-5 col-span-12 md:col-span-6 md:row-span-7 pt-24 md:pt-28 "
@@ -34,15 +34,15 @@ export default function Hero() {
                     >
                         <AnimatedCharacters
                             text="Discover Your Next Favorite Book"
-                            className="font-extrabold text-6xl text-white md:text-slate-700 text-center md:text-start font-gentium uppercase tracking-tighter transform scale-y-125"
+                            className="font-extrabold text-6xl text-slate-700 text-center md:text-start font-gentium uppercase tracking-tighter transform scale-y-125"
                         />
                         <AnimatedCharacters
                             text="From timeless classics to modern bestsellers, explore a world of stories, knowledge, and inspiration. Start your reading adventure today!"
-                            className="text-white md:text-slate-700 text-center md:text-start"
+                            className="text-slate-700 text-center md:text-start"
                         />
                         <motion.div className="flex px-6 md:px-0 flex-col md:flex-row gap-2 md:gap-4">
                             <motion.button
-                                className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-2 border-white md:border-none bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
+                                className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-none bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
                                 initial="hidden"
                                 animate="visible"
                                 variants={buttonVariants}
@@ -53,7 +53,7 @@ export default function Hero() {
                                 </div>
                             </motion.button>
                             <motion.button
-                                className="group relative inline-flex h-12 items-center border-2 border-white md:border-none justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
+                                className="group relative inline-flex h-12 items-center border-none justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
                                 initial="hidden"
                                 animate="visible"
                                 variants={buttonVariants}

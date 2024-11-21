@@ -7,7 +7,7 @@ const GuestLayout = lazy(() => import("./Layouts/GuestLayout"));
 const AuthLayout = lazy(() => import("./Layouts/AuthLayout"));
 const AdminLayout = lazy(() => import("./Layouts/AdminLayout"));
 const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
+const Categories = lazy(() => import("./pages/Categories"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         path: "/about",
         element: (
           <Suspense fallback={<Loading />}>
-            <About />
+            <Categories />
           </Suspense>
         ),
       },
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         path: "/admin/about",
         element: (
           <Suspense fallback={<Loading />}>
-            <About />
+            <Categories />
           </Suspense>
         ),
       },
