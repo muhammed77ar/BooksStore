@@ -51,9 +51,9 @@ export default function Navbar() {
                         <IoMenu className="text-4xl bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
-                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-black text-white z-20">
+                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-[url('../images/navbarbg.jpg')] bg-no-repeat bg-cover bg-bottom text-black font-charm font-bold z-20">
                     <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 text-white uppercase text-xs">
-                        <IoClose className=" text-4xl bg-white text-black p-0 m-0 rounded-full" />
+                        <IoClose className=" text-4xl bg-black text-white p-0 m-0 rounded-full" />
                     </motion.button>
                     <motion.ul variants={ulVariant} className="mt-10 list-none">
                         {MOBILE_NAV_ITEMS.map((navItem) => (
@@ -63,7 +63,7 @@ export default function Navbar() {
                         ))}
                     </motion.ul>
                     <motion.div variants={fadeInVariant} className="mt-20 flex space-x-10">
-                        <h5 className="font-normal">sharethoughts@gmail.com</h5>
+                        <h5 className="font-sans font-medium">thoughts@gmail.com</h5>
                     </motion.div>
                 </motion.div>
             </motion.nav>

@@ -10,6 +10,20 @@ export default function Categories() {
     threshold: 0.2, // Trigger when 20% of the section is visible
   });
 
+  const cardVariants = {
+    hidden: (direction) => ({
+      opacity: 0,
+      x: direction === "left" ? -100 : direction === "right" ? 100 : 0,
+      y: direction === "bottom" ? 100 : 0,
+    }),
+    show: (direction) => ({
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { type: "spring", duration: 1, delay: 1 },
+    }),
+  };
+
   const textVariant = {
     hidden: {
       y: 50, // Move up into view
@@ -32,7 +46,7 @@ export default function Categories() {
         <p className=" text-center text-slate-700 text-sm mt-1 lowercase">Find Your Next Favorite Read Across a World of Genres</p>
       </motion.div>
       <div className="grid grid-cols-2 grid-rows-10 md:grid-cols-6 md:grid-rows-6  gap-3 h-full">
-        <div className="h-[150px] md:h-[300px] col-span-2 row-span-2 md:col-span-3 md:row-span-3 rounded-2xl bg-[url('../images/pdcategory.jpg')] bg-cover bg-center transform transition-all duration-300 hover:scale-[1.03] shadow-custom">
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="left" className="h-[150px] md:h-[300px] col-span-2 row-span-2 md:col-span-3 md:row-span-3 rounded-2xl bg-[url('../images/pdcategory.jpg')] bg-cover bg-center shadow-custom">
           <div className="relative w-full h-full bg-black/50 rounded-2xl group cursor-pointer">
             <button className="absolute top-2 right-2 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white">
               <div className="rotate-0 transition duration-300 group-hover:-rotate-45">
@@ -58,8 +72,8 @@ export default function Categories() {
               <p className=" text-sm">Unlock Your Potential and Transform Your Life</p>
             </div>
           </div>
-        </div>
-        <div className="h-[150px] md:h-[300px] col-span-2 row-span-2 row-start-3 md:col-span-3 md:row-span-3 md:col-start-4 rounded-2xl bg-[url('../images/horror.jpg')] bg-cover bg-center transform transition-all duration-300 hover:scale-[1.03] shadow-custom">
+        </motion.div>
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="right" className="h-[150px] md:h-[300px] col-span-2 row-span-2 row-start-3 md:col-span-3 md:row-span-3 md:col-start-4 rounded-2xl bg-[url('../images/horror.jpg')] bg-cover bg-center shadow-custom">
           <div className="relative w-full h-full rounded-2xl group cursor-pointer">
             <button className="absolute top-2 right-2 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white">
               <div className="rotate-0 transition duration-300 group-hover:-rotate-45">
@@ -85,8 +99,8 @@ export default function Categories() {
               <p className=" text-sm">Face Your Fears in Stories of Terror and Suspense</p>
             </div>
           </div>
-        </div>
-        <div className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-5 md:col-span-2 md:row-span-3 md:row-start-4 rounded-2xl bg-[url('../images/fantasy.jpg')] bg-cover bg-center transform transition-all duration-300 hover:scale-[1.03] shadow-custom">
+        </motion.div>
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom"  className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-5 md:col-span-2 md:row-span-3 md:row-start-4 rounded-2xl bg-[url('../images/fantasy.jpg')] bg-cover bg-center shadow-custom">
           <div className="relative w-full h-full bg-black/50 rounded-2xl group cursor-pointer">
             <button className="absolute top-2 right-2 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white">
               <div className="rotate-0 transition duration-300 group-hover:-rotate-45">
@@ -112,8 +126,8 @@ export default function Categories() {
               <p className=" text-sm">Enter Worlds of Magic, Mystery, and Wonder</p>
             </div>
           </div>
-        </div>
-        <div className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-7 md:col-span-2 md:row-span-3 md:col-start-3 md:row-start-4 rounded-2xl bg-[url('../images/romance.jpg')] bg-cover bg-center transform transition-all duration-300 hover:scale-[1.03] shadow-custom">
+        </motion.div>
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-7 md:col-span-2 md:row-span-3 md:col-start-3 md:row-start-4 rounded-2xl bg-[url('../images/romance.jpg')] bg-cover bg-center shadow-custom">
           <div className="relative w-full h-full bg-black/50 rounded-2xl group cursor-pointer">
             <button className="absolute top-2 right-2 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white">
               <div className="rotate-0 transition duration-300 group-hover:-rotate-45">
@@ -139,8 +153,8 @@ export default function Categories() {
               <p className=" text-sm">Explore Tales of Love, Passion, and Connection</p>
             </div>
           </div>
-        </div>
-        <div className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-9 md:col-span-2 md:row-span-3 md:col-start-5 md:row-start-4 rounded-2xl bg-[url('../images/humor.jpg')] bg-cover bg-center transform transition-all duration-300 hover:scale-[1.03] shadow-custom">
+        </motion.div>
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="h-[150px] md:h-[250px] col-span-2 row-span-2 row-start-9 md:col-span-2 md:row-span-3 md:col-start-5 md:row-start-4 rounded-2xl bg-[url('../images/humor.jpg')] bg-cover bg-center shadow-custom">
           <div className="relative w-full h-full bg-black/50 rounded-2xl group cursor-pointer">
             <button className="absolute top-2 right-2 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white">
               <div className="rotate-0 transition duration-300 group-hover:-rotate-45">
@@ -166,7 +180,7 @@ export default function Categories() {
               <p className=" text-sm">Laugh Out Loud with Wit and Comedy</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
