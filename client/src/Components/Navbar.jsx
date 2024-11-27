@@ -51,19 +51,19 @@ export default function Navbar() {
                         <IoMenu className="text-4xl bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
-                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full flex flex-col items-center bg-[url('../images/navbarbg.jpg')] bg-no-repeat bg-cover bg-bottom text-black font-charm font-bold z-20">
-                    <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 text-white uppercase text-xs">
-                        <IoClose className=" text-4xl bg-black text-white p-0 m-0 rounded-full" />
+                <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full bg-[url('../images/navbarbg.jpg')] bg-no-repeat bg-cover bg-bottom text-black font-charm font-bold z-20">
+                    <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 relative text-white uppercase text-xs w-full">
+                        <IoClose className=" text-4xl bg-black text-white absolute right-9 top-2 p-0 m-0 rounded-full" />
                     </motion.button>
-                    <motion.ul variants={ulVariant} className="mt-10 list-none">
+                    <motion.ul variants={ulVariant} className="mt-10 list-none flex flex-col items-center justify-center">
                         {MOBILE_NAV_ITEMS.map((navItem) => (
                             <motion.li whileTap={{ scale: 0.95 }} key={navItem.id} variants={liVariant} className="my-5">
                                 <motion.div onClick={() => setMobileNavOpen(false)} className="text-4xl capitalize text-center cursor-pointer hover:italic"><Link to={navItem.path}>{navItem.navTitle}</Link></motion.div>
                             </motion.li>
                         ))}
                     </motion.ul>
-                    <motion.div variants={fadeInVariant} className="mt-20 flex space-x-10">
-                        <h5 className="font-sans font-medium">thoughts@gmail.com</h5>
+                    <motion.div variants={fadeInVariant} className="mt-20 space-x-10">
+                        <h5 className="font-sans font-medium text-center">thoughts@gmail.com</h5>
                     </motion.div>
                 </motion.div>
             </motion.nav>
