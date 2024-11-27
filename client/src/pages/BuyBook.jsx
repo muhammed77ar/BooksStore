@@ -30,17 +30,29 @@ export default function BuyBook() {
             transition: { type: "spring", duration: 1, delay: 1 },
         }),
     };
+
+    const textVariant = {
+        hidden: {
+          y: 50, // Move up into view
+          opacity: 0,
+        },
+        show: {
+          y: 0,
+          opacity: 1,
+          transition: {
+            type: "spring",
+            duration: 0.5,
+            delay: 0.8,
+          },
+        },
+      };
+
     return (
         <div ref={ref} className=" bg-[url('/images/paper2.jpg')] bg-cover bg-left py-10">
-            {/* <h1 className="text-4xl font-medium mx-10 mt-10">
-                Our Gallery
-            </h1>
-            <p className=" mx-10 text-gray-500">Discover Morocco's Beauty Through Our Lens</p>
-            <div className="my-2 mx-10">
-                <span className="inline-block w-40 h-1 bg-[#d67940] rounded-full"></span>
-                <span className="inline-block w-3 h-1 ml-1 bg-[#d67940] rounded-full"></span>
-                <span className="inline-block w-1 h-1 ml-1 bg-[#d67940] rounded-full"></span>
-            </div> */}
+            <motion.div variants={textVariant} initial="hidden" animate={inView ? "show" : "hidden"} className=" pb-10 px-6">
+                <h1 className=" text-center font-lexend font-bold capitalize text-3xl text-slate-800">Browse Our Collection of Books</h1>
+                <p className=" text-center text-slate-700 text-sm mt-1 lowercase">Discover the perfect book to buy and start your next reading adventure.</p>
+            </motion.div>
             <Swiper
                 style={{
                     '--swiper-pagination-color': '#000',
