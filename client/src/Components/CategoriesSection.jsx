@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Navbar from "../Components/Navbar";
 
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-export default function Categories() {
+export default function CategoriesSection() {
   const { ref, inView } = useInView({
     triggerOnce: true, // Trigger animation only once
     threshold: 0.2, // Trigger when 20% of the section is visible
@@ -41,9 +40,7 @@ export default function Categories() {
     },
   };
   return (
-    <main>
-      <Navbar />
-      <div ref={ref} className=" h-auto px-4 md:px-28 py-6 bg-[url('/images/paper2.jpg')] bg-cover bg-center">
+    <div ref={ref} className=" h-auto px-4 md:px-28 py-6 bg-[url('/images/paper2.jpg')] bg-cover bg-center">
       <motion.div  variants={textVariant} initial="hidden" animate={inView ? "show" : "hidden"} className=" py-10">
         <h1 className=" text-center font-lexend font-bold capitalize text-3xl text-slate-800">Explore Our Book Categories</h1>
         <p className=" text-center text-slate-700 text-sm mt-1 lowercase">Find Your Next Favorite Read Across a World of Genres</p>
@@ -186,7 +183,6 @@ export default function Categories() {
         </motion.div>
       </div>
     </div>
-    </main>
   )
 }
 

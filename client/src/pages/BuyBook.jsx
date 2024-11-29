@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
-
+import { FiPlus } from "react-icons/fi";
+import { IoMdEye } from "react-icons/io";
 
 import books from '../books';
 
@@ -10,6 +11,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 export default function BuyBook() {
     const { ref, inView } = useInView({
@@ -85,11 +87,9 @@ export default function BuyBook() {
                         slidesPerView: 3, // 3 slides on larger screens
                     },
                 }}
-
-
             >
                 {books.map((book) => (
-                    <SwiperSlide key={book.isbn} className="flex justify-center md:w-[20%] w-[20%]">
+                    <SwiperSlide key={book.id} className="flex justify-center md:w-[20%] w-[20%] relative">
                         <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="flex flex-col items-center">
                             <img
                                 className="object-cover w-auto max-h-[400px] rounded-lg border-2 border-gray-300"
@@ -101,6 +101,10 @@ export default function BuyBook() {
                                 <p className='text-center text-sm font-normal text-slate-700'>{book.author}</p>
                                 <p className='text-center font-medium text-base'>{book.title}</p>
                                 <p className='text-center text-green-800'>{book.price} DH</p>
+                            </div>
+                            <div className=' absolute top-2 right-10 flex flex-col gap-2'>
+                                <FiPlus className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
+                                <Link to={`bookdetails/${book.id}`}><IoMdEye className='bg-black text-white w-[30px] h-[30px] rounded-full  hover:text-black hover:bg-white transition cursor-pointer' /></Link>
                             </div>
                         </motion.div>
                     </SwiperSlide>

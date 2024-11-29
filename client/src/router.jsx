@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { lazy, Suspense } from "react";
 import ProtectedRoute from "./ProtectedRoute";
+import BookDetails from "./pages/BookDetails";
 
 // Lazy load components
 const GuestLayout = lazy(() => import("./Layouts/GuestLayout"));
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <Categories />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/bookdetails/:id",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <BookDetails />
           </Suspense>
         ),
       },
