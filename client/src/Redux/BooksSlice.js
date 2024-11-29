@@ -1,4 +1,6 @@
-const books = [
+import {createSlice} from "@reduxjs/toolkit"
+
+const initialState = [
     {
         id: 1,
         title: "The Subtle Art of Not Giving a F*ck",
@@ -118,7 +120,14 @@ const books = [
         coverType: "Paperback",
         imageUrl: "../images/book7.jpg",
     },
-];
+]
 
-export default books;
- 
+const booksSlice = createSlice({
+    name : "books",
+    initialState,
+    reducers : {
+    }
+})
+
+export const {} = booksSlice.actions;
+export default booksSlice.reducer;

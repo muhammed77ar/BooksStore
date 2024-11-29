@@ -39,7 +39,7 @@ export default function Navbar2() {
         closed: { opacity: 0, y: "100%", transition: { duration: 0.25, ease: "easeInOut" } },
     };
     return (
-        <div className="overflow-hidden bg-[image:linear-gradient(to_right,#f0eee2_0%,#f0eee2_25%,white_25%,white_100%)] bg-cover bg-top">
+        <div className="overflow-hidden bg-white sm:bg-[image:linear-gradient(to_right,#f0eee2_0%,#f0eee2_25%,white_25%,white_100%)] bg-cover bg-top">
             <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className="flex justify-between items-center px-9 py-3">
                 <div className="overflow-hidden">
                     <motion.h variants={hideNavItemsVariant} className="capitalize text-xl font-bold">

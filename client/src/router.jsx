@@ -12,8 +12,18 @@ const Categories = lazy(() => import("./pages/Categories"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 
+import "./styles.css"
+
 // Loading fallback component
-const Loading = () => <div>Loading...</div>;
+const Loading = () => {
+  return <div className=" w-full h-screen flex justify-center items-center">
+    <div className="flex flex-row gap-2">
+  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
+  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
+  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+</div>
+  </div>
+};
 
 const router = createBrowserRouter([
   {

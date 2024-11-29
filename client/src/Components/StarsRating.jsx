@@ -7,7 +7,7 @@ export default function StarsRating({bookRating}) {
     const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
   
     return (
-      <div className="flex items-center mt-2">
+      <div className="flex sm:items-center sm:justify-start justify-center mt-2 sm:text-start text-center w-full">
         {/* Render full stars */}
         {[...Array(fullStars)].map((_, index) => (
           <FaStar key={`full-${index}`} color="gold" />

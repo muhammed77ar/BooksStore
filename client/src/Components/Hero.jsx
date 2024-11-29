@@ -23,24 +23,24 @@ export default function Hero() {
     };
 
     return (
-        <main className="h-screen bg-[url('/images/paper2.jpg')] bg-cover bg-center md:bg-none">
-            <div className='px-6 w-full h-full md:bg-[url("/images/paper2.jpg")]'>
-                <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 md:grid pb-2">
+        <main className="h-screen bg-[url('/images/paper2.jpg')] bg-cover bg-center sm:bg-none">
+            <div className='px-6 w-full h-full sm:bg-[url("/images/paper2.jpg")]'>
+                <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 sm:grid pb-2">
                     <motion.div
-                        className="flex flex-col gap-8 md:gap-5 col-span-12 md:col-span-6 md:row-span-7 pt-24 md:pt-28 "
+                        className="flex flex-col gap-8 sm:gap-5 col-span-12 sm:col-span-6 sm:row-span-7 pt-24 sm:pt-28 "
                         initial="hidden"
                         animate="visible"
                         variants={containerVariants}
                     >
                         <AnimatedCharacters
                             text="Discover Your Next Favorite Book"
-                            className="font-extrabold text-6xl text-slate-700 text-center md:text-start font-gentium uppercase tracking-tighter transform scale-y-125"
+                            className="font-extrabold text-6xl text-slate-700 text-center sm:text-start font-gentium uppercase tracking-tighter transform scale-y-125"
                         />
                         <AnimatedCharacters
                             text="From timeless classics to modern bestsellers, explore a world of stories, knowledge, and inspiration. Start your reading adventure today!"
-                            className="text-slate-700 text-center md:text-start"
+                            className="text-slate-700 text-center sm:text-start"
                         />
-                        <motion.div className="flex px-6 md:px-0 flex-col md:flex-row gap-2 md:gap-4">
+                        <motion.div className="flex px-6 md:px-0 flex-col sm:flex-row gap-2 sm:gap-4">
                             <motion.button
                                 className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-none bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
                                 initial="hidden"
@@ -68,40 +68,40 @@ export default function Hero() {
 
                     {/* Other Divs: Hidden on small screens */}
                     <motion.div
-                        className="hidden md:block md:col-span-4 md:row-span-2 md:col-start-7 bg-slate-300 rounded-xl bg-[url('../images/image9.jpg')] bg-cover bg-center shadow-custom"
+                        className="hidden sm:block sm:col-span-4 sm:row-span-2 sm:col-start-7 bg-slate-300 rounded-xl bg-[url('../images/image9.jpg')] bg-cover bg-center shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >
                     </motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-5 md:col-start-7 md:row-start-3 bg-[url('../images/20-Cozy-Room-Decor-Ideas-for-Fall-and-Winter-Beautiful-Dawn-Designs.jpg')] shadow-custom bg-cover rounded-xl"
+                        className="hidden sm:block sm:col-span-2 sm:row-span-5 sm:col-start-7 sm:row-start-3 bg-[url('../images/20-Cozy-Room-Decor-Ideas-for-Fall-and-Winter-Beautiful-Dawn-Designs.jpg')] shadow-custom bg-cover rounded-xl"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     ></motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-3 md:col-start-11 md:row-start-1 bg-gray-800 rounded-xl bg-[url('../images/image5.jpg')] bg-cover shadow-custom"
+                        className="hidden sm:block sm:col-span-2 sm:row-span-3 sm:col-start-11 sm:row-start-1 bg-gray-800 rounded-xl bg-[url('../images/image5.jpg')] bg-cover shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     ></motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-3 md:col-start-9 md:row-start-5 bg-green-400 rounded-xl bg-[url('../images/image6.jpg')] bg-cover shadow-custom"
+                        className="hidden sm:block sm:col-span-2 sm:row-span-3 sm:col-start-9 sm:row-start-5 bg-green-400 rounded-xl bg-[url('../images/image6.jpg')] bg-cover shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >
                     </motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-4 md:col-start-11 md:row-start-4 bg-blue-400 rounded-xl bg-[url('../images/image7.jpg')] bg-cover bg-center shadow-custom"
+                        className="hidden sm:block sm:col-span-2 sm:row-span-4 sm:col-start-11 sm:row-start-4 bg-blue-400 rounded-xl bg-[url('../images/image7.jpg')] bg-cover bg-center shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >
                     </motion.div>
 
                     <motion.div
-                        className="hidden md:block md:col-span-2 md:row-span-2 md:col-start-9 md:row-start-3 bg-yellow-200 rounded-xl bg-[url('../images/book.jpg')] bg-cover bg-center shadow-custom"
+                        className="hidden sm:block sm:col-span-2 sm:row-span-2 sm:col-start-9 sm:row-start-3 bg-yellow-200 rounded-xl bg-[url('../images/book.jpg')] bg-cover bg-center shadow-custom"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
                     >

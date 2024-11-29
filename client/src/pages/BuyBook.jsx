@@ -4,7 +4,6 @@ import { useInView } from "react-intersection-observer";
 import { FiPlus } from "react-icons/fi";
 import { IoMdEye } from "react-icons/io";
 
-import books from '../books';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -12,8 +11,10 @@ import 'swiper/css/pagination';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function BuyBook() {
+    const books = useSelector((state) => state.books);
     const { ref, inView } = useInView({
         triggerOnce: true, // Trigger animation only once
         threshold: 0.2, // Trigger when 20% of the section is visible
@@ -89,7 +90,7 @@ export default function BuyBook() {
                 }}
             >
                 {books.map((book) => (
-                    <SwiperSlide key={book.id} className="flex justify-center md:w-[20%] w-[20%] relative">
+                    <SwiperSlide key={book.id} className="flex justify-center sm:w-[20%] w-[20%] relative">
                         <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="flex flex-col items-center">
                             <img
                                 className="object-cover w-auto max-h-[400px] rounded-lg border-2 border-gray-300"
@@ -102,7 +103,7 @@ export default function BuyBook() {
                                 <p className='text-center font-medium text-base'>{book.title}</p>
                                 <p className='text-center text-green-800'>{book.price} DH</p>
                             </div>
-                            <div className=' absolute top-2 right-10 flex flex-col gap-2'>
+                            <div className=' absolute top-2 sm:right-10 right-4 flex flex-col gap-2'>
                                 <FiPlus className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
                                 <Link to={`bookdetails/${book.id}`}><IoMdEye className='bg-black text-white w-[30px] h-[30px] rounded-full  hover:text-black hover:bg-white transition cursor-pointer' /></Link>
                             </div>
