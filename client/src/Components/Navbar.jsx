@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import Cart from "./Cart";
 
 const MOBILE_NAV_ITEMS = [
     { id: 0, navTitle: "Home", path: "/" },
@@ -13,6 +15,10 @@ const MOBILE_NAV_ITEMS = [
 
 export default function Navbar() {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    const [open, setOpen] = useState(false)
+    const toggleCart = () => {
+        setOpen(!open);
+    };
 
     const hideNavItemsVariant = {
         opened: { opacity: 0, y: "-100%", transition: { duration: 0.5, ease: "easeInOut" } },
@@ -47,10 +53,15 @@ export default function Navbar() {
                     </motion.h>
                 </div>
                 <div className="overflow-hidden">
-                    <motion.div variants={hideNavItemsVariant} onClick={() => setMobileNavOpen(true)} className="uppercase text-xs cursor-pointer">
-                        <IoMenu className="text-4xl bg-black p-0 m-0 rounded-full text-white" />
+                    <motion.div variants={hideNavItemsVariant} className="uppercase text-xs flex items-center gap-10">
+                        <div className=' relative' onClick={toggleCart}>
+                            <FaShoppingCart className='cart text-3xl cursor-pointer' />
+                            <span className=" absolute -top-0.5 -right-1 bg-red-500 text-white px-1 rounded-full">0</span>
+                        </div>
+                        <IoMenu onClick={() => setMobileNavOpen(true)} className="text-4xl cursor-pointer bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
+                {open && <Cart isOpen={open} onClose={toggleCart} />}
                 <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full bg-[url('../images/navbarbg.jpg')] bg-no-repeat bg-cover bg-bottom text-black font-charm font-bold z-20">
                     <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 relative text-white uppercase text-xs w-full">
                         <IoClose className=" text-4xl bg-black text-white absolute right-9 top-2 p-0 m-0 rounded-full" />

@@ -6,10 +6,13 @@ import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
 import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
-import {useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart } from '../Redux/CartSlice';
+import { MdAddShoppingCart } from "react-icons/md";
 
 export default function BookDetails() {
   const books = useSelector((state) => state.books);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1)
   const { pathname } = useLocation();
@@ -38,6 +41,19 @@ export default function BookDetails() {
     window.scrollTo(0, 0); // Scroll to the top-left corner
   }, [pathname]);
 
+  const Addtocart = () => {
+    useEffect(() => {
+      dispatch(addToCart({
+        id: 1,
+        title: "Test Book",
+        description: "A test book",
+        price: 100,
+        image: "imageUrl",
+        quantity: 1
+      }));
+    }, [dispatch]);
+  }
+
   return (
     <div ref={ref}>
       <Navbar2 />
@@ -57,6 +73,7 @@ export default function BookDetails() {
             <p className=' text-2xl'>{quantity}</p>
             <CiCirclePlus className="text-4xl cursor-pointer" onClick={() => setQuantity((prev) => prev + 1)} />
           </div>
+          <button className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"  onClick={Addtocart()}><MdAddShoppingCart className="text-xl font-bold" /> add to cart</button>
         </motion.div>
       </div>
     </div>
