@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "./Cart";
+import { useSelector } from "react-redux";
 
 
 const MOBILE_NAV_ITEMS = [
@@ -16,6 +17,7 @@ const MOBILE_NAV_ITEMS = [
 
 export default function Navbar2() {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    const books = useSelector((state) => state.cart)
 
     const [open, setOpen] = useState(false)
     const toggleCart = () => {
@@ -58,7 +60,7 @@ export default function Navbar2() {
                     <motion.div variants={hideNavItemsVariant} className="uppercase text-xs flex items-center gap-10">
                         <div className=' relative' onClick={toggleCart}>
                             <FaShoppingCart className='cart text-3xl cursor-pointer' />
-                            <span className=" absolute -top-0.5 -right-1 bg-red-500 text-white px-1 rounded-full">0</span>
+                            <span className=" absolute -top-0.5 -right-1 bg-red-500 text-white px-1 rounded-full">{books.length}</span>
                         </div>
                         <IoMenu onClick={() => setMobileNavOpen(true)} className="text-4xl cursor-pointer bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>

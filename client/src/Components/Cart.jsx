@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
-import { getAllbooks } from '../Redux/CartSlice';
-
 export default function Cart({ isOpen, onClose }) {
     const cartRef = useRef(null);
-    const books = useSelector((state) => state.cart.books);  // Access cart.books correctly
-console.log("Books in cart:", books);
+    const books = useSelector((state) => state.cart);  // Access cart.books correctly
+    console.log("Books in cart:", books);
     useEffect(() => {
         // Function to close the cart when clicking outside
         const handleClickOutside = (event) => {
@@ -24,9 +22,17 @@ console.log("Books in cart:", books);
             document.removeEventListener("click", handleClickOutside);
         };
     }, [isOpen, onClose]);
-  return (
-    <div ref={cartRef} className=' w-[30%] h-auto bg-white z-99 absolute right-24 top-[60px] border-[5px]'>
-        <h1 className=' text-xl font-medium pl-3 pt-2'>Books in your cart</h1>
-    </div>
-  )
+    return (
+        <div ref={cartRef} className=' w-[30%] h-auto bg-white z-99 absolute right-24 top-[60px] border-[5px]'>
+            <h1 className=' text-xl pl-3 uppercase text-center py-4 font-gentium font-extrabold'>book cart</h1>
+            <div className='bg-slate-300 h-[2px] mx-4'></div>
+            {/* <ul>
+                {books.map(book => (
+                    <li key={book.id}>
+
+                    </li>
+                ))}
+            </ul> */}
+        </div>
+    )
 }
