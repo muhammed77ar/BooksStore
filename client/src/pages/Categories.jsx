@@ -42,7 +42,6 @@ export default function Categories() {
   };
   return (
     <main>
-      <Navbar />
       <div ref={ref} className=" h-auto px-4 md:px-28 py-6 bg-[url('/images/paper2.jpg')] bg-cover bg-center">
       <motion.div  variants={textVariant} initial="hidden" animate={inView ? "show" : "hidden"} className=" py-10">
         <h1 className=" text-center font-lexend font-bold capitalize text-3xl text-slate-800">Explore Our Book Categories</h1>

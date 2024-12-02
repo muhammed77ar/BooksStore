@@ -46,7 +46,6 @@ export default function BookDetails() {
 
   return (
     <div ref={ref}>
-      <Navbar2 />
       <div className="py-10 sm:bg-[image:linear-gradient(to_right,#f0eee2_0%,#f0eee2_25%,white_25%,white_100%)] flex flex-col items-center sm:items-start sm:flex-row w-full gap-8 sm:gap-0">
         <motion.div
           variants={cardVariants}
@@ -101,7 +100,7 @@ export default function BookDetails() {
           </div>
           <button
             className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"
-            onClick={() => addBookToCart({ id: findBook.id, title: findBook.title, genre:findBook.genre, price:findBook.price ,quantity })}
+            onClick={() => addBookToCart({ id: findBook.id, title: findBook.title, genre:findBook.genre, imageUrl:findBook.imageUrl, price:findBook.price ,quantity })}
           >
             <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
           </button>

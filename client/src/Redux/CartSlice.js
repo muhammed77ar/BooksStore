@@ -33,8 +33,7 @@ export const cartSlice = createSlice({
             }
         },
         removeItem: (state, action) => {
-            const updatedState = state.filter((item) => item.id !== action.payload.id);
-            // Save the updated cart to localStorage
+            const updatedState = state.filter((item) => item.id !== action.payload); // Use payload directly
             localStorage.setItem('cart', JSON.stringify(updatedState));
             return updatedState;
         },
@@ -43,8 +42,26 @@ export const cartSlice = createSlice({
             localStorage.removeItem('cart');
             return [];
         },
+        incrementQuantity: (state, action) => {
+            const updatedState = state.map((item) =>
+                item.id === action.payload
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+            localStorage.setItem('cart', JSON.stringify(updatedState));
+            return updatedState;
+        },
+        decrementQuantity: (state, action) => {
+            const updatedState = state.map((item) =>
+                item.id === action.payload && item.quantity > 1
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+            );
+            localStorage.setItem('cart', JSON.stringify(updatedState));
+            return updatedState;
+        },
     },
 });
 
-export const { addToCart, removeItem, resetCart } = cartSlice.actions;
+export const { addToCart, removeItem, resetCart, incrementQuantity, decrementQuantity} = cartSlice.actions;
 export default cartSlice.reducer;

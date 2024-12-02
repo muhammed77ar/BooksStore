@@ -11,10 +11,12 @@ import 'swiper/css/pagination';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../Redux/CartSlice';
 
 export default function BuyBook() {
     const books = useSelector((state) => state.books);
+    const dispatch = useDispatch()
     const { ref, inView } = useInView({
         triggerOnce: true, // Trigger animation only once
         threshold: 0.2, // Trigger when 20% of the section is visible
@@ -49,6 +51,10 @@ export default function BuyBook() {
           },
         },
       };
+
+      const handleAddToCart = (book) => {
+        dispatch(addToCart({ ...book, quantity: 1 })); // Add the book with a default quantity of 1
+    };
 
     return (
         <div ref={ref} className=" bg-[url('/images/paper2.jpg')] bg-cover bg-left py-10">
@@ -104,7 +110,7 @@ export default function BuyBook() {
                                 <p className='text-center text-green-800'>{book.price} DH</p>
                             </div>
                             <div className=' absolute top-2 sm:right-10 right-4 flex flex-col gap-2'>
-                                <FiPlus className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
+                                <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre:book.genre, imageUrl:book.imageUrl, price:book.price})} className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
                                 <Link to={`bookdetails/${book.id}`}><IoMdEye className='bg-black text-white w-[30px] h-[30px] rounded-full  hover:text-black hover:bg-white transition cursor-pointer' /></Link>
                             </div>
                         </motion.div>
