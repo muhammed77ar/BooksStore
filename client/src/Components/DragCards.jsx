@@ -29,7 +29,7 @@ export const DragCards = () => {
   return (
     <motion.div
       ref={ref} // Attach the ref to the container
-      className="relative p-0 m-0 bg-[url('../images/paper2.jpg')] bg-left-top place-content-center min-h-screen flex flex-col items-center justify-center z-0 text-[15vw] font-black text-neutral-800 md:text-[100px] w-[100%] overflow-hidden"
+      className="relative p-0 m-0 bg-slate-100 bg-left-top place-content-center min-h-screen flex flex-col items-center justify-center z-0 text-[15vw] font-black text-neutral-800 md:text-[100px] w-[100%] overflow-hidden"
     >
       <motion.div
         variants={textVariant}
@@ -56,7 +56,8 @@ const Cards = () => {
   const containerRef = useRef(null);
 
   return (
-    <div className="absolute inset-0 z-10" ref={containerRef}>
+    <div>
+      <div className="absolute inset-0 z-10" ref={containerRef}>
       <Card
         containerRef={containerRef}
         src="../images/book1.jpg"
@@ -120,6 +121,7 @@ const Cards = () => {
         left="55%"
         className="w-36 md:w-56 shadow-custom"
       />
+    </div>
     </div>
   );
 };

@@ -35,7 +35,7 @@ export default function Cart({ isOpen, onClose }) {
         };
     }, [isOpen, onClose]);
     return (
-        <div ref={cartRef} className=' w-[40%] h-[85vh] bg-white rounded-xl z-99 absolute right-24 top-[60px] border-[5px] overflow-auto shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]'>
+        <div ref={cartRef} className=' w-full md:w-[40%] h-[85vh] bg-white rounded-xl z-99 absolute right-0 md:right-24 top-[60px] border-[5px] overflow-auto shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]'>
             <h1 className=' text-xl uppercase py-4 font-gentium font-extrabold flex justify-center items-center gap-2'>shopping cart <HiOutlineShoppingCart /></h1>
             <div className='bg-slate-300 h-[2px] mx-4'></div>
             {

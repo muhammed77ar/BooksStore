@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Navbar2 from '../Components/Navbar2';
 import StarsRating from '../Components/StarsRating';
 import { CiCirclePlus, CiCircleMinus } from 'react-icons/ci';
 import { motion } from 'framer-motion';
@@ -46,7 +45,7 @@ export default function BookDetails() {
 
   return (
     <div ref={ref}>
-      <div className="py-10 sm:bg-[image:linear-gradient(to_right,#f0eee2_0%,#f0eee2_25%,white_25%,white_100%)] flex flex-col items-center sm:items-start sm:flex-row w-full gap-8 sm:gap-0">
+      <div className="py-10 mt-[60px] sm:bg-[image:linear-gradient(to_right,#f0eee2_0%,#f0eee2_25%,white_25%,white_100%)] flex flex-col items-center sm:items-start sm:flex-row w-full gap-8 sm:gap-0">
         <motion.div
           variants={cardVariants}
           initial="hidden"

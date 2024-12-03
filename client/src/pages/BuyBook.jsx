@@ -38,28 +38,28 @@ export default function BuyBook() {
 
     const textVariant = {
         hidden: {
-          y: 50, // Move up into view
-          opacity: 0,
+            y: 50, // Move up into view
+            opacity: 0,
         },
         show: {
-          y: 0,
-          opacity: 1,
-          transition: {
-            type: "spring",
-            duration: 0.5,
-            delay: 0.8,
-          },
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                duration: 0.5,
+                delay: 0.8,
+            },
         },
-      };
+    };
 
-      const handleAddToCart = (book) => {
+    const handleAddToCart = (book) => {
         dispatch(addToCart({ ...book, quantity: 1 })); // Add the book with a default quantity of 1
     };
 
     return (
-        <div ref={ref} className=" bg-[url('/images/paper2.jpg')] bg-cover bg-left py-10">
+        <div ref={ref} className=" bg-white bg-cover bg-left py-10">
             <motion.div variants={textVariant} initial="hidden" animate={inView ? "show" : "hidden"} className=" pb-10 px-6">
-                <h1 className=" text-center font-lexend font-bold capitalize text-3xl text-slate-800">Browse Our Collection of Books</h1>
+                <h1 className=" text-center font-lexend font-bold capitalize text-3xl text-slate-800">Browse Our best selling books</h1>
                 <p className=" text-center text-slate-700 text-sm mt-1 lowercase">Discover the perfect book to buy and start your next reading adventure.</p>
             </motion.div>
             <Swiper
@@ -110,7 +110,7 @@ export default function BuyBook() {
                                 <p className='text-center text-green-800'>{book.price} DH</p>
                             </div>
                             <div className=' absolute top-2 sm:right-10 right-4 flex flex-col gap-2'>
-                                <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre:book.genre, imageUrl:book.imageUrl, price:book.price})} className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
+                                <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre: book.genre, imageUrl: book.imageUrl, price: book.price })} className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
                                 <Link to={`bookdetails/${book.id}`}><IoMdEye className='bg-black text-white w-[30px] h-[30px] rounded-full  hover:text-black hover:bg-white transition cursor-pointer' /></Link>
                             </div>
                         </motion.div>

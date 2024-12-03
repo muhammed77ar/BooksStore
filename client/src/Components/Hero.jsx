@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import AnimatedCharacters from './AnimatedCharacters';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
     const textVariants = {
@@ -23,8 +24,8 @@ export default function Hero() {
     };
 
     return (
-        <main className="h-screen bg-[url('/images/paper2.jpg')] bg-cover bg-center sm:bg-none">
-            <div className='px-6 w-full h-full sm:bg-[url("/images/paper2.jpg")]'>
+        <main className="h-screen bg-white bg-cover bg-center sm:bg-none mt-[60px]">
+            <div className='px-6 w-full h-full'>
                 <div className="grid grid-cols-12 grid-rows-6 h-[90%] gap-4 sm:grid pb-2">
                     <motion.div
                         className="flex flex-col gap-8 sm:gap-5 col-span-12 sm:col-span-6 sm:row-span-7 pt-24 sm:pt-28 "
@@ -42,15 +43,17 @@ export default function Hero() {
                         />
                         <motion.div className="flex px-6 md:px-0 flex-col sm:flex-row gap-2 sm:gap-4">
                             <motion.button
-                                className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-none bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"
+                                className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border-none bg-slate-800  font-medium text-neutral-200 transition hover:scale-110"
                                 initial="hidden"
                                 animate="visible"
                                 variants={buttonVariants}
                             >
-                                <span>Shop Now</span>
-                                <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
-                                    <div className="relative h-full w-8 bg-white/20"></div>
-                                </div>
+                                <Link to={"/books"} className='px-6 h-full w-full flex justify-center items-center'>
+                                    <span>Shop Now</span>
+                                    <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+                                        <div className="relative h-full w-8 bg-white/20"></div>
+                                    </div>
+                                </Link>
                             </motion.button>
                             <motion.button
                                 className="group relative inline-flex h-12 items-center border-none justify-center overflow-hidden rounded-full bg-slate-800 px-6 font-medium text-neutral-200 transition hover:scale-110"

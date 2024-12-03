@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
@@ -10,17 +10,35 @@ import { useSelector } from "react-redux";
 const MOBILE_NAV_ITEMS = [
     { id: 0, navTitle: "Home", path: "/" },
     { id: 1, navTitle: "login", path: "/login" },
-    { id: 2, navTitle: "signup", path: "/signup" },
+    // { id: 2, navTitle: "signup", path: "/signup" },
     { id: 3, navTitle: "categories", path: "/categories" },
+    {id: 4, navTitle:"Books", path:"/books"}
 ];
 
 export default function Navbar() {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const [open, setOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
     const books = useSelector((state) => state.cart)
     const toggleCart = () => {
         setOpen(!open);
     };
+
+     // Handle scroll event
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     const hideNavItemsVariant = {
         opened: { opacity: 0, y: "-100%", transition: { duration: 0.5, ease: "easeInOut" } },
@@ -48,7 +66,7 @@ export default function Navbar() {
     };
     return (
         <div className="overflow-hidden bg-white bg-cover bg-top">
-            <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className="flex justify-between items-center px-9 py-3">
+            <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-9 py-3 bg-white transition-shadow duration-300 ${isScrolled ? "shadow-md" : "shadow-none"}`}>
                 <div className="overflow-hidden">
                     <motion.h variants={hideNavItemsVariant} className="capitalize text-xl font-bold">
                         <Link to={"/"}>Thoughts</Link>

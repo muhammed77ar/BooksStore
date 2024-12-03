@@ -13,6 +13,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 
 import "./styles.css"
+import Books from "./pages/Books";
 
 // Loading fallback component
 const Loading = () => {
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <BookDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/books",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Books />
           </Suspense>
         ),
       },
