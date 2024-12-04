@@ -2,23 +2,46 @@ import { useDispatch, useSelector } from "react-redux"
 import { FiPlus } from "react-icons/fi";
 import { addToCart } from "../Redux/CartSlice";
 import StarsRating2 from "../Components/StarsRating2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 export default function Books() {
     const books = useSelector((state) => state.books);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+    const { pathname } = useLocation();
 
     const handleAddToCart = (book) => {
-        dispatch(addToCart({ ...book, quantity: 1 })); // Add the book with a default quantity of 1
+        dispatch(addToCart({ ...book, quantity: 1 }));
     };
 
     const handleButtonClick = (id) => {
-        navigate(`/bookdetails/${id}`); // Use an absolute path
+        navigate(`/bookdetails/${id}`);
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
+
+      const cardVariants = {
+        hidden: (direction) => ({
+          opacity: 0,
+          x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
+          y: direction === 'bottom' ? 100 : 0,
+        }),
+        show: (direction) => ({
+          opacity: 1,
+          x: 0,
+          y: 0,
+          transition: { type: 'spring', duration: 0.8, delay: 0.8 },
+        }),
+      };
+
     return (
-        <div className=" mt-[80px] mb-[50px]">
+        <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" ref={ref} className=" mt-[80px] mb-[50px]">
             <ul className=" flex flex-wrap gap-11 px-14">
                 {books.map(book => (
                     <li key={book.id} className="w-[250px] relative mt-6">
@@ -39,6 +62,6 @@ export default function Books() {
                     </li>
                 ))}
             </ul>
-        </div>
+        </motion.div>
     )
 }

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Navbar from "../Components/Navbar";
+
 
 const DURATION = 0.25;
 const STAGGER = 0.025;

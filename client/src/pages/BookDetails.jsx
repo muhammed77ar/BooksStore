@@ -35,7 +35,7 @@ export default function BookDetails() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  
+
   const addBookToCart = (book) => {
     dispatch(addToCart(book));
   };
@@ -97,12 +97,14 @@ export default function BookDetails() {
               onClick={() => setQuantity((prev) => prev + 1)}
             />
           </div>
+          <div className=' flex justify-center md:justify-start'>
           <button
             className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"
-            onClick={() => addBookToCart({ id: findBook.id, title: findBook.title, genre:findBook.genre, imageUrl:findBook.imageUrl, price:findBook.price ,quantity })}
+            onClick={() => addBookToCart({ id: findBook.id, title: findBook.title, genre: findBook.genre, imageUrl: findBook.imageUrl, price: findBook.price, quantity })}
           >
             <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
           </button>
+          </div>
         </motion.div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import BookDetails from "./pages/BookDetails";
 
@@ -11,17 +11,19 @@ const Home = lazy(() => import("./pages/Home"));
 const Categories = lazy(() => import("./pages/Categories"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
+const Books = lazy(() => import("./pages/Books"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 
 import "./styles.css"
-import Books from "./pages/Books";
+
 
 // Loading fallback component
 const Loading = () => {
   return <div className=" w-full h-screen flex justify-center items-center">
     <div className="flex flex-row gap-2">
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.3s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.5s]"></div>
 </div>
   </div>
 };
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <Books />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Checkout />
           </Suspense>
         ),
       },
