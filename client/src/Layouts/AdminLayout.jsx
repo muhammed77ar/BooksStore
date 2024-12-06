@@ -5,36 +5,36 @@ import { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
+import AdminNavbar from "../Components/AdminNavbar";
 
 export default function AdminLayout() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-  const user = useSelector((state) => state.auth.user)
-  console.log(user)
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
   const dispatch = useDispatch()
-  const GetUserdata = async () => {
+ 
+
+  const GetUserData = async () => {
     try {
       const response = await axiosClient.get("api/admin");
-      if (response) {
-        dispatch(setUserInfo(response?.data?.user))
+      if (response && response?.data && response?.data?.admin) {
+        console.log(dispatch(setUserInfo(response?.data?.admin)))
       }
+      
     } catch (error) {
-      console.log(error)
+      console.error('Error fetching user data:', error);
     }
-  }
-
+  };
   useEffect(() => {
     if (isAuthenticated) {
-      GetUserdata();
+      GetUserData();
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   return (
     <div className="font-lexend">
-      <Navbar />
+      <AdminNavbar />
       <main>
         <Outlet />
       </main>
-      <Footer />
     </div>
   )
 }

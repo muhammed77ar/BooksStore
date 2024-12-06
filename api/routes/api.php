@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum'])->get('/admin', function (Request $request) {
-    return $request->user();
+    $admin = $request->user();
+    return ["admin" => $admin];
 });

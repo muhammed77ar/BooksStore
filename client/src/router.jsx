@@ -13,6 +13,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Books = lazy(() => import("./pages/Books"));
 const Checkout = lazy(() => import("./pages/Checkout"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 import "./styles.css"
 
@@ -90,6 +91,14 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "admin/dashboard",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Dashboard />
+          </Suspense>
+        ),
+      },
+      {
         path: "/admin",
         element: (
           <Suspense fallback={<Loading />}>
@@ -102,6 +111,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <Categories />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/books",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Books />
           </Suspense>
         ),
       },
