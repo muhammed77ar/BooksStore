@@ -26,7 +26,8 @@ class BooksController extends Controller
         ]);
 
 
-        $request->image_url = '/storage/' . $request->file('image_url')->store('/images/booksImages', 'public');
+
+        $request->image_url = '/storage/'.$request->file('image_url')->store('/images/booksImages', 'public');
 
 
         $book = Book::create($validatedData);

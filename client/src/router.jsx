@@ -13,7 +13,8 @@ const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Books = lazy(() => import("./pages/Books"));
 const Checkout = lazy(() => import("./pages/Checkout"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+const AddBooks = lazy(() => import("./pages/AddBooks"));
+const AddGenres = lazy(() => import("./pages/AddGenres"));
 
 import "./styles.css"
 
@@ -91,34 +92,18 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "admin/dashboard",
+        path: "/admin/addbooks",
         element: (
           <Suspense fallback={<Loading />}>
-            <Dashboard />
+            <AddBooks />
           </Suspense>
         ),
       },
       {
-        path: "/admin",
+        path: "/admin/addgenres",
         element: (
           <Suspense fallback={<Loading />}>
-            <Home />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/admin/categories",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Categories />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/admin/books",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Books />
+            <AddGenres />
           </Suspense>
         ),
       },
