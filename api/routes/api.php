@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->get('/admin', function (Request $request) {
     $admin = $request->user();
     return ["admin" => $admin];
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/admin/addbook', [BooksController::class, 'store']);
+    Route::post('/admin/addgenre', [GenreController::class, 'store']);
 });
