@@ -15,6 +15,7 @@ const Books = lazy(() => import("./pages/Books"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const AddBooks = lazy(() => import("./pages/AddBooks"));
 const AddGenres = lazy(() => import("./pages/AddGenres"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 import "./styles.css"
 
@@ -91,6 +92,14 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
+      {
+        path: "/admin/dashboard",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Dashboard />
+          </Suspense>
+        ),
+      },
       {
         path: "/admin/addbooks",
         element: (

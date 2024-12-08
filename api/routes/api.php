@@ -21,7 +21,11 @@ Route::middleware(['auth:sanctum'])->get('/admin', function (Request $request) {
     return ["admin" => $admin];
 });
 
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/addbook', [BooksController::class, 'store']);
     Route::post('/admin/addgenre', [GenreController::class, 'store']);
 });
+
+
+Route::get("/genres", [GenreController::class, "index"]);

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
+
+    public function index(){
+        return response()->json(Genre::all());
+    }
+
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

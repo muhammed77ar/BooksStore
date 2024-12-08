@@ -2,9 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosClient from "../axios"
 import { setUserInfo } from "../Redux/AuthSlice";
 import { useEffect } from "react";
-import Navbar from "../Components/Navbar";
 import { Link, Outlet } from "react-router-dom";
-import Footer from "../Components/Footer";
 import AdminNavbar from "../Components/AdminNavbar";
 import { useState } from 'react'
 import { MdDashboard } from "react-icons/md";
@@ -14,6 +12,7 @@ import { FaHome } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { GoMoveToEnd } from "react-icons/go";
 import { GoMoveToStart } from "react-icons/go";
+import { setGenres } from "../Redux/GenresSlice";
 
 
 export default function AdminLayout() {
@@ -26,7 +25,7 @@ export default function AdminLayout() {
         try {
             const response = await axiosClient.get("api/admin");
             if (response && response?.data && response?.data?.admin) {
-                console.log(dispatch(setUserInfo(response?.data?.admin)))
+                dispatch(setUserInfo(response?.data?.admin))
             }
 
         } catch (error) {
@@ -38,6 +37,23 @@ export default function AdminLayout() {
             GetUserData();
         }
     }, [isAuthenticated]);
+
+
+    const FetchGenres = async () => {
+        try {
+            const response = await axiosClient.get("api/genres");
+            if (response && response?.data) {
+                dispatch(setGenres(response?.data))
+            }
+
+        } catch (error) {
+            console.error('Error fetching Genres data:', error);
+        }
+    };
+
+    useEffect(() => {
+        FetchGenres();
+    }, []);
 
     return (
         <div className="flex h-screen overflow-hidden">
