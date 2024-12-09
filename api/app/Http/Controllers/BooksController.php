@@ -21,6 +21,7 @@ class BooksController extends Controller
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
             'rating' => 'nullable|numeric|min:0|max:5',
+            'is_bestseller' => 'nullable|boolean',
             'cover_type' => 'nullable|string|max:255',
             'image_url' => 'required|image|mimes:jpg,jpeg,png,gif|max:3048',
         ]);

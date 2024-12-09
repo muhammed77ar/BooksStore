@@ -56,11 +56,12 @@ export default function AdminLayout() {
     }, []);
 
     return (
-        <div className="flex h-screen overflow-hidden">
+        <>
+        <AdminNavbar />
+        <div className=" relative flex h-full overflow-hidden">
             {/* Sidebar */}
-            <AdminNavbar />
             <div
-                className={`fixed top-0 left-0 z-40 h-full w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-[60px] h-screen left-0 z-40 w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mt-[60px]">
@@ -108,7 +109,7 @@ export default function AdminLayout() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col overflow-y-auto">
+            <div className="flex-1 h-auto flex flex-col overflow-y-auto">
                 {/* Menu Button for Small Screens */}
                 <div className="p-4 md:hidden mt-[60px]">
                     <button
@@ -124,5 +125,6 @@ export default function AdminLayout() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
