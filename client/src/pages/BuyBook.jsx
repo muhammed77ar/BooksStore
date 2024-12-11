@@ -16,6 +16,7 @@ import { addToCart } from '../Redux/CartSlice';
 
 export default function BuyBook() {
     const books = useSelector((state) => state.books);
+    console.log(books)
     const dispatch = useDispatch()
     const { ref, inView } = useInView({
         triggerOnce: true, // Trigger animation only once
@@ -100,7 +101,7 @@ export default function BuyBook() {
                         <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="flex flex-col items-center">
                             <img
                                 className="object-cover w-auto max-h-[400px] rounded-lg border-2 border-gray-300"
-                                src={book.imageUrl}
+                                src={`${import.meta.env.VITE_API_BASE_URL}${book?.image_url}`}
                                 alt={book.title}
                                 style={{ width: 'auto', height: 'auto' }}
                             />

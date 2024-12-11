@@ -54,7 +54,7 @@ export default function Cart({ isOpen, onClose }) {
                     <ul className=' flex flex-col gap-2'>
                         {books.map(book => (
                             <li key={book.id} className=' flex gap-2 mx-3 border-b-2 py-2'>
-                                <Link className='w-[26%]' to={`bookdetails/${book.id}`}><img className=' w-full h-full' src={book.imageUrl} alt="" /></Link>
+                                <Link className='w-[26%]' to={`bookdetails/${book.id}`}><img className=' w-full h-full' src={`${import.meta.env.VITE_API_BASE_URL}${book?.imageUrl}`} alt="" /></Link>
                                 <div className=' flex items-center justify-between w-full'>
                                     <div>
                                         <h1 className=' text-lg font-bold'>{book.title}</h1>

@@ -29,3 +29,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 Route::get("/genres", [GenreController::class, "index"]);
+Route::get("/books", [BooksController::class, "index"]);

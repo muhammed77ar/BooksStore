@@ -54,8 +54,8 @@ export default function BookDetails() {
           className="flex justify-center sm:block"
         >
           <img
-            src={findBook.imageUrl}
-            alt={`Cover of the book ${findBook.title}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}${findBook?.image_url}`}
+            alt={`Cover of the book ${findBook?.title}`}
             className="sm:ml-40 w-[55%] sm:w-[300px] shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]"
           />
         </motion.div>
@@ -66,25 +66,25 @@ export default function BookDetails() {
           custom="right"
           className="sm:ml-10 ml-0 text-center sm:text-start w-full sm:w-[50%]"
         >
-          <h2 className="text-3xl font-medium mb-4">{findBook.title}</h2>
+          <h2 className="text-3xl font-medium mb-4">{findBook?.title}</h2>
           <p className="text-gray-600">
-            <span className="underline">Author:</span> {findBook.author}
+            <span className="underline">Author:</span> {findBook?.author}
           </p>
           <p className="text-gray-600">
-            <span className="underline">Genre:</span> {findBook.genre}
+            <span className="underline">Genre:</span> {findBook?.genre?.name}
           </p>
           <p className="text-gray-600">
-            <span className="underline">Language:</span> {findBook.language}
+            <span className="underline">Language:</span> {findBook?.language}
           </p>
           <p className="text-gray-600">
-            <span className="underline">Publication Year:</span> {findBook.publicationYear}
+            <span className="underline">Publication Year:</span> {findBook?.publication_year}
           </p>
-          <StarsRating bookRating={findBook.rating} />
+          <StarsRating bookRating={findBook?.rating} />
           <p className="mt-2 sm:px-0 px-5">
-            <span className="underline">Description:</span> {findBook.description}
+            <span className="underline">Description:</span> {findBook?.description}
           </p>
           <p className="text-green-800 font-medium text-lg mt-2">
-            <span className="underline">Price:</span> {findBook.price}DH
+            <span className="underline">Price:</span> {findBook?.price}DH
           </p>
           <div className="mt-2 flex gap-2 items-center sm:justify-start justify-center">
             <CiCircleMinus
@@ -100,7 +100,7 @@ export default function BookDetails() {
           <div className=' flex justify-center md:justify-start'>
           <button
             className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"
-            onClick={() => addBookToCart({ id: findBook.id, title: findBook.title, genre: findBook.genre, imageUrl: findBook.imageUrl, price: findBook.price, quantity })}
+            onClick={() => addBookToCart({ id: findBook?.id, title: findBook?.title, genre: findBook?.genre?.name, imageUrl: findBook?.image_url, price: findBook?.price, quantity })}
           >
             <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
           </button>

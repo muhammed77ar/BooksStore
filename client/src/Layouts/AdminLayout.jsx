@@ -12,8 +12,9 @@ import { FaHome } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { GoMoveToEnd } from "react-icons/go";
 import { GoMoveToStart } from "react-icons/go";
+import { setBooks } from "../Redux/BooksSlice";
 import { setGenres } from "../Redux/GenresSlice";
-
+import { MdCategory } from "react-icons/md";
 
 export default function AdminLayout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -39,21 +40,38 @@ export default function AdminLayout() {
     }, [isAuthenticated]);
 
 
+
     const FetchGenres = async () => {
         try {
-            const response = await axiosClient.get("api/genres");
-            if (response && response?.data) {
-                dispatch(setGenres(response?.data))
-            }
-
+          const response = await axiosClient.get("api/genres");
+          if (response && response?.data) {
+            dispatch(setGenres(response?.data))
+          }
+    
         } catch (error) {
-            console.error('Error fetching Genres data:', error);
+          console.error('Error fetching Genres data:', error);
         }
-    };
-
-    useEffect(() => {
+      };
+    
+      useEffect(() => {
         FetchGenres();
-    }, []);
+      }, []);
+    
+      const FetchBooks = async () => {
+        try {
+          const response = await axiosClient.get("/api/books");
+          if (response && response?.data && response?.data?.books) {
+            dispatch(setBooks(response?.data?.books));
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      useEffect(() => {
+        FetchBooks();
+      }, []);
+
 
     return (
         <>
@@ -61,7 +79,7 @@ export default function AdminLayout() {
         <div className=" relative flex h-full overflow-hidden">
             {/* Sidebar */}
             <div
-                className={`fixed top-[60px] h-screen left-0 z-40 w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-[60px] left-0 z-40 w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mt-[60px]">
@@ -73,15 +91,15 @@ export default function AdminLayout() {
                             <GoMoveToStart className=' text-2xl font-extrabold' />
                         </button>Sidebar Menu</h2>
                     <ul className="mt-4 space-y-2">
-                        <li className=' flex items-center px-3 hover:bg-gray-700'>
-                            <FaHome />
-                            <a href="#" className="block p-2 hover:bg-gray-700 rounded">
-                                Home Page
-                            </a>
-                        </li>
-                        <Link to={"admin/addgenres"}>
+                       <Link to={"admin/dashboard"}>
                             <li className=' flex items-center px-3 hover:bg-gray-700'>
                                 <MdDashboard />
+                                <p className="block p-2 rounded">Dashboard</p>
+                            </li>
+                        </Link>
+                        <Link to={"admin/addgenres"}>
+                            <li className=' flex items-center px-3 hover:bg-gray-700'>
+                                <MdCategory />
                                 <p className="block p-2 rounded">Genres</p>
                             </li>
                         </Link>

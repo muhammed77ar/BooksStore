@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+
+    public function index()
+    {
+        $books = Book::with('genre')->orderBy('created_at', 'desc')->get();
+        return response()->json(["books" => $books]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -28,7 +35,9 @@ class BooksController extends Controller
 
 
 
-        $request->image_url = '/storage/'.$request->file('image_url')->store('/images/booksImages', 'public');
+        $imagePath = $request->file('image_url')->store('/images/booksImages', 'public');
+
+        $validatedData['image_url'] = '/storage/' . $imagePath;
 
 
         $book = Book::create($validatedData);

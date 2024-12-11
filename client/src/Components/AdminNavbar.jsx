@@ -101,7 +101,7 @@ export default function AdminNavbar() {
             <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-9 py-3 bg-white transition-shadow duration-300 ${isScrolled ? "shadow-md" : "shadow-none"}`}>
                 <div className="overflow-hidden">
                     <motion.h variants={hideNavItemsVariant} className="capitalize text-xl font-bold">
-                        <Link to={"/admin"}>Thoughts</Link>
+                        Thoughts
                     </motion.h>
                 </div>
                 <div className="">

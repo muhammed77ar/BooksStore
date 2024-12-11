@@ -41,7 +41,7 @@ export default function Checkout() {
                 <ul className=' flex flex-col gap-2 px-4 py-8'>
                     {books.map(book => (
                         <li key={book.id} className=' flex gap-2 items-start border-b-2 pb-2'>
-                            <div><img src={book.imageUrl} className=' w-[100px]' alt="" /></div>
+                            <div><img src={`${import.meta.env.VITE_API_BASE_URL}${book.imageUrl}`} className=' w-[100px]' alt="" /></div>
                             <div className=' flex items-center justify-between w-full mt-1'>
                                 <div>
                                     <h1 className=' text-lg font-bold'>{book.title}</h1>

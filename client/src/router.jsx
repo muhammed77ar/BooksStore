@@ -16,8 +16,9 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const AddBooks = lazy(() => import("./pages/AddBooks"));
 const AddGenres = lazy(() => import("./pages/AddGenres"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const EditBook = lazy(() => import("./pages/EditBook"));
 
-import "./styles.css"
+import "./styles.css";
 
 
 // Loading fallback component
@@ -105,6 +106,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <AddBooks />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/editbook/:id",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <EditBook />
           </Suspense>
         ),
       },
