@@ -197,7 +197,7 @@ export default function AddBooks() {
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="w-[30%] h-[90%] object-fill rounded border-2 border-gray-600"
+                  className="w-[30%] h-[90%] object-fill border-2 border-gray-700"
                 />
               ) : (
                 <>

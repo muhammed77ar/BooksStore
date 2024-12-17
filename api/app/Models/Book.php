@@ -24,6 +24,7 @@ class Book extends Model
         'rating',
         'cover_type',
         'image_url',
+        'is_bestseller',
     ];
 
     public function genre() : BelongsTo 

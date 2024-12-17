@@ -1,15 +1,23 @@
 import { useState } from "react";
 import axiosClient from "../axios";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditBook() {
     const { id } = useParams();
     const books = useSelector((state) => state.books);
     const findBook = books.find((book) => book.id === parseInt(id));
+    const navigate = useNavigate();
 
     const genres = useSelector((state) => state.genres);
     const [imagePreview, setImagePreview] = useState(null);
+    const [isBestseller, setIsBestseller] = useState(false);
+
+    // Toggle handler
+    const toggleBestseller = (value) => {
+        setIsBestseller(value);
+    };
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -36,17 +44,20 @@ export default function EditBook() {
 
         // Handle file separately
         if (e.target.image_url.files[0]) {
-            formData.append("image_url", e.target.image_url.files[0]); // Handle file input
+            formData.append("image_url", e.target.image_url.files[0]);
         }
+        formData.append("is_bestseller", isBestseller);
+
+        formData.append("_method", "PUT");
 
         try {
-            const response = await axiosClient.post("api/admin/addbook", formData, {
+            const response = await axiosClient.post(`api/admin/editbook/${id}`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data", // Important for file uploads
+                    "Content-Type": "multipart/form-data",
                 },
             });
-            console.log(response);
-            location.reload();
+            navigate("/admin/dashboard")
+            location.reload()
         } catch (error) {
             console.log(error);
         }
@@ -126,7 +137,7 @@ export default function EditBook() {
                             Genre
                         </label>
                         <select
-                            defaultValue={findBook?.genre?.name}
+                            defaultValue={findBook?.genre?.id}
                             id="genre_id"
                             name="genre_id"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -138,6 +149,42 @@ export default function EditBook() {
                                 </option>
                             ))}
                         </select>
+                    </div>
+                    <div className=" flex flex-col w-fit">
+                        <label className="text-white dark:text-gray-200" htmlFor="is_bestseller">
+                         Is Bestseller
+                        </label>
+                        <div className="inline-flex border-2 mt-2 border-gray-300 rounded-md overflow-hidden">
+                            {/* False Button */}
+                            <button
+                                type="button"
+                                onClick={() => toggleBestseller(false)}
+                                className={`px-4 py-2 ${!isBestseller
+                                    ? "bg-gray-700 text-white"
+                                    : "bg-gray-300 text-gray-700"
+                                    }`}
+                            >
+                                False
+                            </button>
+
+                            {/* True Button */}
+                            <button
+                                type="button"
+                                onClick={() => toggleBestseller(true)}
+                                className={`px-4 py-2 ${isBestseller
+                                    ? "bg-blue-600 text-white"
+                                    : "bg-gray-300 text-gray-700"
+                                    }`}
+                            >
+                                True
+                            </button>
+                        </div>
+                        <input
+                            type="hidden"
+                            name="is_bestseller"
+                            id="is_bestseller"
+                            value={isBestseller ? true : false}
+                        />
                     </div>
 
                     <div>
@@ -158,7 +205,7 @@ export default function EditBook() {
                             Stock
                         </label>
                         <input
-                         defaultValue={findBook?.stock}
+                            defaultValue={findBook?.stock}
                             id="stock"
                             type="number"
                             name="stock"
@@ -171,27 +218,25 @@ export default function EditBook() {
                             Rating
                         </label>
                         <input
-                             defaultValue={findBook?.rating}
+                            defaultValue={findBook?.rating}
                             id="rating"
                             type="text"
                             name="rating"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         />
                     </div>
-
                     <div>
                         <label className="text-white dark:text-gray-200" htmlFor="coverType">
                             Cover Type
                         </label>
                         <input
-                             defaultValue={findBook?.cover_type}
+                            defaultValue={findBook?.cover_type}
                             id="coverType"
                             name="cover_type"
                             type="text"
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         />
                     </div>
-
                     <div>
                         <label className="text-white dark:text-gray-200" htmlFor="description">
                             Description
@@ -218,10 +263,10 @@ export default function EditBook() {
                             ) : (
                                 <>
                                     <img
-                                    src={`${import.meta.env.VITE_API_BASE_URL}${findBook?.image_url}`}
-                                    alt=""
-                                    className="w-[30%] h-[90%] object-fill rounded border-2 border-gray-600"
-                                />
+                                        src={`${import.meta.env.VITE_API_BASE_URL}${findBook?.image_url}`}
+                                        alt=""
+                                        className="w-[30%] h-[90%] object-fill rounded border-2 border-gray-600"
+                                    />
                                 </>
                             )}
                             <input
@@ -234,8 +279,7 @@ export default function EditBook() {
                             />
                         </label>
                     </div>
-
-                    <div className="flex justify-start items-center w-full">
+                    <div className="flex justify-end items-end w-full">
                         <button
                             type="submit"
                             className="block px-6 py-2 mt-3 text-lg font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

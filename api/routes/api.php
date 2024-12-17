@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum'])->get('/admin', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/addbook', [BooksController::class, 'store']);
+    Route::put('/admin/editbook/{id}', [BooksController::class, 'update']);
     Route::post('/admin/addgenre', [GenreController::class, 'store']);
 });
 
