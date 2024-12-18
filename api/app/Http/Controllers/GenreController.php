@@ -42,4 +42,12 @@ class GenreController extends Controller
             'genre' => $genre,
         ], 200);
     }
+
+    public function destroy(Request $request, $id){
+        $genre = Genre::findOrFail($id);
+        $genre->delete();
+        return response()->json([
+            'message' => 'Genre deleted successfully',
+        ], 200);
+    }
 }

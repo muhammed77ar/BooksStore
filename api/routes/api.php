@@ -23,10 +23,14 @@ Route::middleware(['auth:sanctum'])->get('/admin', function (Request $request) {
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    // the Books
     Route::post('/admin/addbook', [BooksController::class, 'store']);
     Route::put('/admin/editbook/{id}', [BooksController::class, 'update']);
+    Route::delete('/admin/deletebook/{id}', [BooksController::class, 'destroy']);
+    // the Genres
     Route::post('/admin/addgenre', [GenreController::class, 'store']);
     Route::put('/admin/editgenre/{id}', [GenreController::class, 'update']);
+    Route::delete('/admin/deletegenre/{id}', [GenreController::class, 'destroy']);
 });
 
 

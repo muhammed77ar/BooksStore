@@ -16,8 +16,11 @@ const genresSlice = createSlice({
               state[index].name = name; // Update the name of the genre
             }
         },
+        removeGenre: (state, action) => {
+            return state.filter((genre) => genre.id !== action.payload);
+        },
     }
 })
 
-export const {setGenres, updateGenre} = genresSlice.actions;
+export const {setGenres, updateGenre, removeGenre} = genresSlice.actions;
 export default genresSlice.reducer;

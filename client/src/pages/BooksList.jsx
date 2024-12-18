@@ -1,15 +1,32 @@
 import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import axiosClient from "../axios";
+import { useDispatch } from "react-redux";
+import { removeBook } from "../Redux/BooksSlice";
 
-export default function BooksList({books}) {
+export default function BooksList({ books }) {
+  const dispatch = useDispatch();
 
-    function formatJoinDate(dateString) {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const month = date.toLocaleString("en-US", { month: "short" });
-        const year = date.getFullYear();
-        return `${day} ${month} ${year}`;
+  function formatJoinDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axiosClient.delete(`api/admin/deletebook/${id}`);
+      if (response.status === 200) {
+        dispatch(removeBook(id));
+      } else {
+        alert("Failed to delete the genre.");
+      }
+    } catch (error) {
+      console.error(error.response?.data || error.message);
     }
+  }
 
   return (
     <section className="container mx-auto p-6">
@@ -38,7 +55,7 @@ export default function BooksList({books}) {
                   <td className="px-4 py-3 text-sm"><span className={`${book?.stock > 0 ? "bg-blue-200" : "bg-red-200 whitespace-pre"} px-2.5 py-2 font-semibold rounded-full`}>{book?.stock > 0 ? book?.stock : "Out Of Stock"}</span></td>
                   <td className="px-4 py-3 text-sm"><span className={`${book?.is_bestseller === false ? "bg-red-500" : "bg-green-500"} px-2 py-2 font-semibold text-white rounded-full`}>{book?.is_bestseller === false ? "No" : "Yes"}</span></td>
                   <td className="px-4 py-3 text-ms font-semibold">{formatJoinDate(book?.created_at)}</td>
-                  <td className="px-4 text-sm"><div className="flex justify-center items-center gap-2"><Link to={`/admin/editbook/${book?.id}`}><MdEdit className="text-2xl text-blue-500" /></Link><MdDelete className=" text-2xl text-red-500" /></div></td>
+                  <td className="px-4 text-sm"><div className="flex justify-center items-center gap-2"><Link to={`/admin/editbook/${book?.id}`}><MdEdit className="text-2xl text-blue-500" /></Link><MdDelete onClick={() => handleDelete(book?.id)} className=" text-2xl text-red-500 cursor-pointer" /></div></td>
                 </tr>
               ))}
             </tbody>

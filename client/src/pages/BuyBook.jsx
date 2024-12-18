@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
 import { FiPlus } from "react-icons/fi";
 import { IoMdEye } from "react-icons/io";
+import { AiFillStop } from "react-icons/ai";
 
 
 import 'swiper/css';
@@ -99,19 +100,28 @@ export default function BuyBook() {
                 {books.map((book) => (
                     <SwiperSlide key={book.id} className="flex justify-center sm:w-[20%] w-[20%] relative">
                         <motion.div variants={cardVariants} initial="hidden" animate={inView ? "show" : "hidden"} custom="bottom" className="flex flex-col items-center">
-                            <img
-                                className="object-cover w-auto max-h-[400px] rounded-lg border-2 border-gray-300"
-                                src={`${import.meta.env.VITE_API_BASE_URL}${book?.image_url}`}
-                                alt={book.title}
-                                style={{ width: 'auto', height: 'auto' }}
-                            />
+                            <div className=' relative'>
+                                {
+                                    book.stock === 0 && <div className=' absolute rounded-lg bg-black/50 w-full h-full flex items-center justify-center'>
+                                    <h1 className=' bg-slate-300 w-[100%] text-center py-2 text-red-600 text-2xl font-extrabold font-gentium'>Out of Stock</h1>
+                                  </div>
+                                }
+                                <img
+                                    className="object-cover w-auto max-h-[400px] rounded-lg border-2 border-gray-300"
+                                    src={`${import.meta.env.VITE_API_BASE_URL}${book?.image_url}`}
+                                    alt={book.title}
+                                    style={{ width: 'auto', height: 'auto' }}
+                                />
+                            </div>
                             <div className=" mt-2 flex flex-col items-center justify-center">
                                 <p className='text-center text-sm font-normal text-slate-700'>{book.author}</p>
                                 <p className='text-center font-medium text-base'>{book.title}</p>
                                 <p className='text-center text-green-800'>{book.price} DH</p>
                             </div>
                             <div className=' absolute top-2 sm:right-10 right-4 flex flex-col gap-2'>
-                                <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre: book.genre, imageUrl: book.imageUrl, price: book.price })} className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />
+                                {book.stock === 0 ? <FiPlus className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-not-allowed' />
+                                :
+                                <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre: book.genre.name, imageUrl: book.image_url, price: book.price })} className='bg-black text-white w-[30px] h-[30px] rounded-full hover:text-black hover:bg-white transition cursor-pointer' />}
                                 <Link to={`bookdetails/${book.id}`}><IoMdEye className='bg-black text-white w-[30px] h-[30px] rounded-full  hover:text-black hover:bg-white transition cursor-pointer' /></Link>
                             </div>
                         </motion.div>

@@ -22,7 +22,7 @@ export default function Books() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-      }, [pathname]);
+    }, [pathname]);
 
 
     return (
@@ -31,6 +31,11 @@ export default function Books() {
                 {books.map(book => (
                     <li key={book.id} className="w-[250px] relative mt-6">
                         <div className=" relative flex justify-center w-full items-center py-7 rounded-lg bg-[conic-gradient(at_bottom,_var(--tw-gradient-stops))] from-[#e4e4e7] via-[#a1a1aa] to-[#52525b]">
+                            {
+                                book.stock === 0 && <div className=' absolute rounded-lg bg-black/50 w-full h-full flex items-center justify-center'>
+                                    <h1 className=' bg-slate-300 w-[100%] text-center py-2 text-red-600 text-2xl font-extrabold font-gentium'>Out of Stock</h1>
+                                </div>
+                            }
                             <img className="w-[200px] shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]" src={`${import.meta.env.VITE_API_BASE_URL}${book?.image_url}`} alt="" />
                             <StarsRating2 bookRating={book.rating} />
                         </div>
@@ -43,7 +48,8 @@ export default function Books() {
                             </div>
 
                         </div>
-                        <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre: book.genre.name, imageUrl: book.image_url, price: book.price })} className=" absolute -top-2 -right-2 bg-white text-3xl rounded-full border-2 border-black cursor-pointer" />
+                        {book.stock === 0 ? <FiPlus className=" absolute -top-2 -right-2 bg-white text-3xl rounded-full border-2 border-black cursor-not-allowed" /> : <FiPlus onClick={() => handleAddToCart({ id: book.id, title: book.title, genre: book.genre.name, imageUrl: book.image_url, price: book.price })} className=" absolute -top-2 -right-2 bg-white text-3xl rounded-full border-2 border-black cursor-pointer" />}
+                        
                     </li>
                 ))}
             </ul>

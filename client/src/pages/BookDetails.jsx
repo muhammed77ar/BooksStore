@@ -53,11 +53,19 @@ export default function BookDetails() {
           custom="left"
           className="flex justify-center sm:block"
         >
-          <img
-            src={`${import.meta.env.VITE_API_BASE_URL}${findBook?.image_url}`}
-            alt={`Cover of the book ${findBook?.title}`}
-            className="sm:ml-40 w-[55%] sm:w-[300px] shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]"
-          />
+          <div className='relative sm:ml-40 w-[55%] sm:w-[300px]'>
+            {
+              findBook?.stock === 0 && <div className=' absolute rounded-lg bg-black/50 w-full h-full flex items-center justify-center'>
+                <h1 className=' bg-slate-300 w-[100%] text-center py-2 text-red-600 text-2xl font-extrabold font-gentium'>Out of Stock</h1>
+              </div>
+            }
+            <img
+              src={`${import.meta.env.VITE_API_BASE_URL}${findBook?.image_url}`}
+              alt={`Cover of the book ${findBook?.title}`}
+              className="w-full sm:w-[300px] shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]"
+            />
+          </div>
+
         </motion.div>
         <motion.div
           variants={cardVariants}
@@ -98,12 +106,16 @@ export default function BookDetails() {
             />
           </div>
           <div className=' flex justify-center md:justify-start'>
-          <button
-            className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"
-            onClick={() => addBookToCart({ id: findBook?.id, title: findBook?.title, genre: findBook?.genre?.name, imageUrl: findBook?.image_url, price: findBook?.price, quantity })}
-          >
-            <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
-          </button>
+            {findBook?.stock === 0 ? <button
+              className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase cursor-not-allowed"
+            >
+              <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
+            </button> : <button
+              className="mt-2 flex items-center justify-center gap-2 bg-blue-400 px-3 py-2 rounded-full text-white uppercase"
+              onClick={() => addBookToCart({ id: findBook?.id, title: findBook?.title, genre: findBook?.genre?.name, imageUrl: findBook?.image_url, price: findBook?.price, quantity })}
+            >
+              <MdAddShoppingCart className="text-xl font-bold" /> Add to Cart
+            </button>}
           </div>
         </motion.div>
       </div>

@@ -3,7 +3,7 @@ import { MdEdit, MdDelete, MdCheck, MdCancel } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import axiosClient from '../axios';
-import { updateGenre } from '../Redux/GenresSlice';
+import { removeGenre, updateGenre } from '../Redux/GenresSlice';
 
 export default function GenresList() {
   const genres = useSelector((state) => state.genres);
@@ -55,6 +55,20 @@ export default function GenresList() {
     setEditName("");
   };
 
+
+  const handleDelete = async (id) => {
+     try {
+      const response = await axiosClient.delete(`api/admin/deletegenre/${id}`);
+      if (response.status === 200) {
+        dispatch(removeGenre(id));
+    } else {
+        alert("Failed to delete the genre.");
+    }
+     } catch (error) {
+      console.error(error.response?.data || error.message);
+     }
+  }
+
   return (
     <section className="container mx-auto p-6">
       <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -104,7 +118,7 @@ export default function GenresList() {
                             className="text-2xl text-blue-500 cursor-pointer"
                             onClick={() => handleEditClick(genre?.id, genre?.name)}
                           />
-                          <MdDelete className="text-2xl text-red-500 cursor-pointer" />
+                          <MdDelete onClick={() => handleDelete(genre?.id)} className="text-2xl text-red-500 cursor-pointer" />
                         </>
                       )}
                     </div>

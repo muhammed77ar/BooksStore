@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axiosClient from "../axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBooks() {
   const genres = useSelector((state) => state.genres);
   const [imagePreview, setImagePreview] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -40,8 +43,8 @@ export default function AddBooks() {
           "Content-Type": "multipart/form-data", // Important for file uploads
         },
       });
-      console.log(response);
-      location.reload();
+      navigate("/admin/dashboard")
+      location.reload()
     } catch (error) {
       console.log(error);
     }

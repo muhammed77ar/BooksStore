@@ -106,7 +106,7 @@ export default function AdminLayout() {
                         <Link to={"admin/addbooks"} >
                             <li className=' flex items-center px-3 hover:bg-gray-700'>
                                 <FaBookOpen />
-                                <p className="block p-2 rounded">Books</p>
+                                <p className="block p-2 rounded">Add Book</p>
                             </li>
                         </Link>
 

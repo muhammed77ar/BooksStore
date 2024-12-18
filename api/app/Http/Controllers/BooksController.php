@@ -88,4 +88,12 @@ class BooksController extends Controller
             'book' => $book,
         ], 200);
     }
+
+    public function destroy(Request $request, $id){
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return response()->json([
+            'message' => 'Book deleted successfully',
+        ], 200);
+    }
 }
