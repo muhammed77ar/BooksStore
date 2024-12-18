@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::get("/genres", [GenreController::class, "index"]);
 Route::get("/books", [BooksController::class, "index"]);
+Route::post('/orders', [OrderController::class, 'store']);
