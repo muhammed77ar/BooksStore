@@ -36,7 +36,7 @@ export default function BooksList({books}) {
                   <td className="px-4 py-3 text-sm"><span className=" bg-green-300 p-2 font-medium rounded-full">{book?.price}DH</span></td>
                   <td className="px-4 py-3 text-ms font-semibold">{book?.genre?.name}</td>
                   <td className="px-4 py-3 text-sm"><span className={`${book?.stock > 0 ? "bg-blue-200" : "bg-red-200 whitespace-pre"} px-2.5 py-2 font-semibold rounded-full`}>{book?.stock > 0 ? book?.stock : "Out Of Stock"}</span></td>
-                  <td className="px-4 py-3 text-sm"><span className={`${book?.is_bestseller === 0 ? "bg-red-500" : "bg-green-500"} px-2 py-2 font-semibold text-white rounded-full`}>{book?.is_bestseller === 0 ? "No" : "Yes"}</span></td>
+                  <td className="px-4 py-3 text-sm"><span className={`${book?.is_bestseller === false ? "bg-red-500" : "bg-green-500"} px-2 py-2 font-semibold text-white rounded-full`}>{book?.is_bestseller === false ? "No" : "Yes"}</span></td>
                   <td className="px-4 py-3 text-ms font-semibold">{formatJoinDate(book?.created_at)}</td>
                   <td className="px-4 text-sm"><div className="flex justify-center items-center gap-2"><Link to={`/admin/editbook/${book?.id}`}><MdEdit className="text-2xl text-blue-500" /></Link><MdDelete className=" text-2xl text-red-500" /></div></td>
                 </tr>

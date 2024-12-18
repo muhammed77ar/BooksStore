@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Book extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'is_bestseller' => 'boolean',
+    ];    
     protected $fillable = [
         'title',
         'author',

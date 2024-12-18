@@ -128,9 +128,15 @@ const booksSlice = createSlice({
     reducers : {
         setBooks(state, action){
             return action.payload;
-        }
+        },
+        updatedBook: (state, action) => {
+            const index = state.findIndex((book) => book.id === action.payload.id);
+            if (index !== -1) {
+              state[index] = action.payload;
+            }
+          },
     }
 })
 
-export const {setBooks} = booksSlice.actions;
+export const {setBooks, updatedBook} = booksSlice.actions;
 export default booksSlice.reducer;

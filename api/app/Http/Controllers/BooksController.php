@@ -51,7 +51,12 @@ class BooksController extends Controller
 
     public function update(Request $request, $id)
     {
-        $book = Book::findOrFail($id);      
+        $book = Book::findOrFail($id);
+
+        // Preprocess boolean fields
+        $request->merge([
+            'is_bestseller' => filter_var($request->is_bestseller, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE),
+        ]);
 
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',

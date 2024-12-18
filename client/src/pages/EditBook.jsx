@@ -183,7 +183,7 @@ export default function EditBook() {
                             type="hidden"
                             name="is_bestseller"
                             id="is_bestseller"
-                            value={isBestseller ? true : false}
+                            value={isBestseller ? 1 : 0}
                         />
                     </div>
 
