@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +34,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/addgenre', [GenreController::class, 'store']);
     Route::put('/admin/editgenre/{id}', [GenreController::class, 'update']);
     Route::delete('/admin/deletegenre/{id}', [GenreController::class, 'destroy']);
+    // the Notifications
+    Route::get('/admin/dashboard', [DashboardController::class, 'showDashboard']);
+    Route::get('admin/notifications', [NotificationController::class, 'index']);
+    Route::post('admin/notifications/{notification}', [NotificationController::class, 'markAsRead']);
 });
+
+
 
 
 Route::get("/genres", [GenreController::class, "index"]);

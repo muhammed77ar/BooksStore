@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -41,6 +42,12 @@ class OrderController extends Controller
                 'price' => $item['price'],
                 'image_url' => $item['image_url'],
             ]);
+        }
+
+        // Notify the authenticated admin
+        $admin = auth()->user();
+        if ($admin) {
+            $admin->notify(new NewOrderNotification($order)); // Send the notification
         }
 
         return response()->json([
