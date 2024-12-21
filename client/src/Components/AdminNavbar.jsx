@@ -10,6 +10,8 @@ import axiosClient from "../axios";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { IoNotifications } from "react-icons/io5";
+import NotificationsDropdDown from "./NotificationsDropdDown";
 
 const MOBILE_NAV_ITEMS = [
     { id: 0, navTitle: "Home", path: "/admin" },
@@ -24,8 +26,12 @@ export default function AdminNavbar() {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const [open, setOpen] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [NotificationdropdownOpen, setNotificationDropdownOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const books = useSelector((state) => state.cart);
+    const notifications = useSelector((state) => state.notifications);
+    const NotificationsLength =  notifications.length;
+    console.log(notifications)
     const navigate = useNavigate();
     const toggleCart = () => {
         setOpen(!open);
@@ -35,11 +41,29 @@ export default function AdminNavbar() {
         setDropdownOpen(!dropdownOpen);
     };
 
+    const toggleNotificationDropdown = () => {
+        setNotificationDropdownOpen(!NotificationdropdownOpen);
+    };
+
     // Close the dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest('#dropdownUserAvatarButton') && !event.target.closest('#dropdownAvatar')) {
                 setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    // Close the Notifications dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('#dropdownNotificationAvatarButton') && !event.target.closest('#dropdownNotificationAvatar')) {
+                setNotificationDropdownOpen(false);
             }
         };
 
@@ -96,6 +120,7 @@ export default function AdminNavbar() {
         navigate("/login")
     }
 
+
     return (
         <div className="overflow-hidden bg-white bg-cover bg-top">
             <motion.nav initial="closed" animate={mobileNavOpen ? "opened" : "closed"} className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-9 py-3 bg-white transition-shadow duration-300 ${isScrolled ? "shadow-md" : "shadow-none"}`}>
@@ -106,10 +131,10 @@ export default function AdminNavbar() {
                 </div>
                 <div className="">
                     <motion.div variants={hideNavItemsVariant} className="uppercase text-xs flex items-center gap-10">
-                        <div className=' relative' onClick={toggleCart}>
-                            <FaShoppingCart className='cart text-3xl cursor-pointer' />
-                            <span className=" absolute -top-0.5 -right-1 bg-red-500 text-white px-1 rounded-full">{books.length}</span>
-                        </div>
+                        <button id="dropdownNotificationAvatarButton" onClick={() => { toggleNotificationDropdown()}} data-dropdown-toggle="dropdownNotificationAvatar" className="flex text-sm relative rounded-full p-1 md:me-0 border-2" type="button" >
+                            <div className=" bg-red-600 w-5 h-5 rounded-full absolute -top-1.5 -right-2 text-white">{NotificationsLength}</div>
+                            <IoNotifications className=" text-2xl" />
+                        </button>
                         <button id="dropdownUserAvatarButton" onClick={() => { toggleDropdown()}} data-dropdown-toggle="dropdownAvatar" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
                             <span className="sr-only">Open user menu</span>
                             <img className="w-10 h-10 rounded-full object-cover" src={import.meta.env.VITE_API_BASE_URL + user?.profile} alt="user photo" />
@@ -117,7 +142,6 @@ export default function AdminNavbar() {
                         <IoMenu onClick={() => setMobileNavOpen(true)} className="text-4xl cursor-pointer bg-black p-0 m-0 rounded-full text-white" />
                     </motion.div>
                 </div>
-                {open && <Cart isOpen={open} onClose={toggleCart} />}
                 {/* Dropdown menu */}
                 {dropdownOpen && (
                         <div id="dropdownAvatar" className="absolute right-2 top-full mt-1 z-20 bg-slate-600 divide-y divide-gray-100 rounded-lg shadow w-44">
@@ -125,14 +149,6 @@ export default function AdminNavbar() {
                                 <div>{user?.name || "WanderMorocco Member"}</div>
                                 <div className="font-medium truncate">{user?.email || "name@flowbite.com"}</div>
                             </div>
-                            {/* <ul className="text-sm text-white">
-                            <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-black">Profile</a>
-                            </li>
-                            <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-black">Settings</a>
-                            </li>
-                        </ul> */}
                             <div className="cursor-pointer">
                                 <Link to={"user/profile"} className="px-4 py-2 text-sm text-white hover:bg-gray-100 hover:text-black flex justify-center items-center gap-2"><CgProfile className=" text-xl -ml-2" />Profile</Link>
                             </div>
@@ -144,6 +160,13 @@ export default function AdminNavbar() {
                             </div>
                         </div>
                     )}
+                    {
+                        NotificationdropdownOpen && (
+                            <div id="dropdownNotificationAvatar" className="absolute right-40 top-full mt-1 z-20 bg-slate-600 divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <NotificationsDropdDown />
+                        </div>
+                        )
+                    }
                 <motion.div variants={mobileMenuVariant} className="fixed top-0 left-0 h-screen w-full bg-[url('../images/navbarbg.jpg')] bg-no-repeat bg-cover bg-bottom text-black font-charm font-bold z-20">
                     <motion.button variants={fadeInVariant} onClick={() => setMobileNavOpen(false)} className="self-end px-9 py-3 relative text-white uppercase text-xs w-full">
                         <IoClose className=" text-4xl bg-black text-white absolute right-9 top-2 p-0 m-0 rounded-full" />

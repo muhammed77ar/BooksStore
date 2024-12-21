@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Notifications\NewOrderNotification;
@@ -44,10 +45,14 @@ class OrderController extends Controller
             ]);
         }
 
+        // Load the related OrderItems into the order (for notification)
+        $order->load('items');
+
         // Notify the authenticated admin
-        $admin = auth()->user();
+        $admin = Admin::where('email', 'adminbooks@gmail.com')->first(); // Replace this with actual admin logic
+
         if ($admin) {
-            $admin->notify(new NewOrderNotification($order)); // Send the notification
+            $admin->notify(new NewOrderNotification($order)); // Send notification to admin
         }
 
         return response()->json([

@@ -10,23 +10,17 @@ class NotificationController extends Controller
     // Fetch all notifications for the authenticated user
     public function index(Request $request)
     {
-        // Fetch unread notifications for the authenticated user
-        $notifications = $request->user()->unreadNotifications;
-        
         return response()->json([
-            'notifications' => $notifications,
+            'notifications' => $request->user()->unreadNotifications,
         ]);
     }
 
     // Mark a notification as read
-    public function markAsRead(Request $request, $notificationId)
+    public function markAsRead(Request $request, $id)
     {
-        $notification = $request->user()->notifications()->findOrFail($notificationId);
-        
-        $notification->markAsRead();  // Mark the notification as read
-        
-        return response()->json([
-            'message' => 'Notification marked as read',
-        ]);
+        $notification = $request->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+
+        return response()->json(['message' => 'Notification marked as read!']);
     }
 }

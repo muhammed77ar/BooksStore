@@ -15,6 +15,7 @@ import { GoMoveToStart } from "react-icons/go";
 import { setBooks } from "../Redux/BooksSlice";
 import { setGenres } from "../Redux/GenresSlice";
 import { MdCategory } from "react-icons/md";
+import { setNotifications } from "../Redux/NotificationsSlice";
 
 export default function AdminLayout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -71,6 +72,20 @@ export default function AdminLayout() {
       useEffect(() => {
         FetchBooks();
       }, []);
+
+
+      const FetchNotifications = async () => {
+        try {
+            const response = await axiosClient.get("/api/admin/notifications");
+            dispatch(setNotifications(response?.data?.notifications))
+        } catch (error) {
+            console.error("Error fetching notifications:", error);
+        }
+    }
+
+    useEffect(() => {
+        FetchNotifications()
+    }, []);
 
 
     return (
