@@ -17,6 +17,7 @@ const AddBooks = lazy(() => import("./pages/AddBooks"));
 const AddGenres = lazy(() => import("./pages/AddGenres"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const EditBook = lazy(() => import("./pages/EditBook"));
+const OrdersList = lazy(() => import("./pages/OrdersList"));
 
 import "./styles.css";
 
@@ -122,6 +123,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <AddGenres />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/orders",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <OrdersList />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/books",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Books />
           </Suspense>
         ),
       },

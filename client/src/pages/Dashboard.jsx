@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const books = useSelector((state) => state.books);
   const genres = useSelector((state) => state.genres);
+  const orders = useSelector((state) => state.orders);
 
 
   return (
@@ -46,7 +47,7 @@ export default function Dashboard() {
             <FaBagShopping className="text-4xl text-black" />
           </div>
           <div>
-            <span className="text-2xl font-bold text-white">100</span>
+            <span className="text-2xl font-bold text-white">{orders.length}</span>
             <p className="text-base text-white">Total Orders</p>
           </div>
         </div>

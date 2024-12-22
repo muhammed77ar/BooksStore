@@ -57,7 +57,7 @@ export default function Checkout() {
                 quantity: book.quantity,         // Matches backend expected field
                 price: book.price,               // Matches backend expected field
                 image_url: book.imageUrl || '',  // Matches backend expected field (fallback to empty string if no image)
-            }))
+            })),
         };
 
         try {

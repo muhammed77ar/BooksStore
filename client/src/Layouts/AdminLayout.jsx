@@ -16,6 +16,7 @@ import { setBooks } from "../Redux/BooksSlice";
 import { setGenres } from "../Redux/GenresSlice";
 import { MdCategory } from "react-icons/md";
 import { setNotifications } from "../Redux/NotificationsSlice";
+import { setOrders } from "../Redux/OrdersSlice";
 
 export default function AdminLayout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -88,13 +89,27 @@ export default function AdminLayout() {
     }, []);
 
 
+    const FetchOrders = async () => {
+        try {
+            const response = await axiosClient.get("/api/admin/orders");
+            dispatch(setOrders(response?.data?.orders))
+        } catch (error) {
+            console.error("Error fetching notifications:", error);
+        }
+    }
+
+    useEffect(() => {
+        FetchOrders()
+    }, []);
+ 
+
     return (
         <>
         <AdminNavbar />
         <div className=" relative flex h-full overflow-hidden">
             {/* Sidebar */}
             <div
-                className={`fixed top-[60px] left-0 z-40 w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-[60px] h-screen md:h-auto left-0 z-40 w-64 bg-gray-800 text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mt-[60px]">
@@ -124,13 +139,18 @@ export default function AdminLayout() {
                                 <p className="block p-2 rounded">Add Book</p>
                             </li>
                         </Link>
-
+                        <Link to={"admin/books"} >
+                            <li className=' flex items-center px-3 hover:bg-gray-700'>
+                                <FaBookOpen />
+                                <p className="block p-2 rounded">Books</p>
+                            </li>
+                        </Link>
+                        <Link to={"admin/orders"}>
                         <li className=' flex items-center px-3 hover:bg-gray-700'>
                             <FaBagShopping />
-                            <a href="#" className="block p-2 hover:bg-gray-700 rounded">
-                                Orders
-                            </a>
+                            <p className="block p-2 hover:bg-gray-700 rounded">Orders</p>
                         </li>
+                        </Link>
                         <li className=' flex items-center px-3 hover:bg-gray-700'>
                             <IoMdSettings />
                             <a href="#" className="block p-2 hover:bg-gray-700 rounded">
@@ -142,7 +162,7 @@ export default function AdminLayout() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 h-auto flex flex-col overflow-y-auto">
+            <div className="flex-1 h-full flex flex-col overflow-y-auto">
                 {/* Menu Button for Small Screens */}
                 <div className="p-4 md:hidden mt-[60px]">
                     <button

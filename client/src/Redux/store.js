@@ -4,6 +4,7 @@ import booksSlice from "./BooksSlice";
 import cartReducer from "./CartSlice";
 import genresSlice from "./GenresSlice";
 import notificationsSlice from "./NotificationsSlice";
+import ordersSlice from "./OrdersSlice"
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         books: booksSlice,
         cart: cartReducer, 
         genres: genresSlice,
-        notifications : notificationsSlice
+        notifications : notificationsSlice,
+        orders : ordersSlice,
     },
 });
 

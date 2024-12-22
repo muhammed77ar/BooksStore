@@ -38,6 +38,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'showDashboard']);
     Route::get('admin/notifications', [NotificationController::class, 'index']);
     Route::post('admin/notifications/{notification}', [NotificationController::class, 'markAsRead']);
+    // Orders
+    Route::get('/admin/orders', [OrderController::class, 'index']);
 });
 
 
