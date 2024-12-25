@@ -13,6 +13,7 @@ export default function Home() {
       <BuyBook />
       <CategoriesSection />
       <AboutSection />
+      <ContactUs />
     </>
   );
 }
